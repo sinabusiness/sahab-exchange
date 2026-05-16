@@ -8,7 +8,11 @@ const Hero = () => {
       <div className="absolute inset-0">
         <img
           src={heroBg}
-          alt="صراف - منصة تبادل العملات"
+          alt="صراف - منصة تبادل العملات الرقمية والذهب"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover opacity-40"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
@@ -19,6 +23,9 @@ const Hero = () => {
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6">
             <span className="gold-text">صَرّاف</span>
+            <span className="block text-2xl md:text-3xl lg:text-4xl mt-4 text-foreground/90 font-bold">
+              منصة تبادل العملات الرقمية والذهب والفضة
+            </span>
           </h1>
           <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mx-auto mb-4 font-light">
             منصتك الموثوقة لتبادل العملات الرقمية والذهب والفضة
