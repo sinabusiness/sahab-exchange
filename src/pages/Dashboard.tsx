@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { Loader2, Plus, Clock, CheckCircle, XCircle, ArrowUpDown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useCryptoRates, fiatRates } from "@/hooks/useCryptoRates";
+import { Helmet } from "react-helmet-async";
 
 interface Order {
   id: string;
@@ -129,6 +130,16 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>لوحة التحكم | صراف</title>
+        <meta name="description" content="أدر طلبات تبادل العملات الرقمية والذهب والفضة الخاصة بك في صراف، وتابع حالة كل عملية بشكل لحظي." />
+        <link rel="canonical" href="https://sarraf-connect-hub.lovable.app/dashboard" />
+        <meta name="robots" content="noindex" />
+        <meta property="og:title" content="لوحة التحكم | صراف" />
+        <meta property="og:description" content="أدر طلبات التبادل وتابع حالتها لحظياً." />
+        <meta property="og:url" content="https://sarraf-connect-hub.lovable.app/dashboard" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <Navbar />
       <div className="pt-24 px-4 pb-12">
         <div className="container max-w-5xl mx-auto">
@@ -149,7 +160,7 @@ const Dashboard = () => {
           {/* New Order Form */}
           {showForm && (
             <div className="bg-card border border-border rounded-2xl p-6 mb-8 gold-glow">
-              <h3 className="text-lg font-bold mb-4">إنشاء طلب تحويل</h3>
+              <h2 className="text-lg font-bold mb-4">إنشاء طلب تحويل</h2>
               <form onSubmit={handleCreateOrder} className="space-y-4">
                 <div className="flex gap-4">
                   <button
@@ -178,8 +189,9 @@ const Dashboard = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="text-sm text-muted-foreground mb-1 block">من العملة</label>
+                    <label htmlFor="order-from" className="text-sm text-muted-foreground mb-1 block">من العملة</label>
                     <select
+                      id="order-from"
                       value={fromCurrency}
                       onChange={(e) => setFromCurrency(e.target.value)}
                       className="w-full bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
@@ -190,8 +202,9 @@ const Dashboard = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground mb-1 block">إلى العملة</label>
+                    <label htmlFor="order-to" className="text-sm text-muted-foreground mb-1 block">إلى العملة</label>
                     <select
+                      id="order-to"
                       value={toCurrency}
                       onChange={(e) => setToCurrency(e.target.value)}
                       className="w-full bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
@@ -202,8 +215,9 @@ const Dashboard = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground mb-1 block">المبلغ</label>
+                    <label htmlFor="order-amount" className="text-sm text-muted-foreground mb-1 block">المبلغ</label>
                     <input
+                      id="order-amount"
                       type="number"
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
@@ -237,7 +251,7 @@ const Dashboard = () => {
           {/* Orders Table */}
           <div className="bg-card border border-border rounded-2xl overflow-hidden">
             <div className="p-6 border-b border-border">
-              <h3 className="text-lg font-bold">طلباتي</h3>
+              <h2 className="text-lg font-bold">طلباتي</h2>
             </div>
 
             {loadingOrders ? (

@@ -35,9 +35,10 @@ const CurrencyConverter = () => {
           <div className="flex flex-col md:flex-row items-center gap-4">
             {/* From */}
             <div className="flex-1 w-full">
-              <label className="text-sm text-muted-foreground mb-2 block">من</label>
+              <label htmlFor="conv-from-amount" className="text-sm text-muted-foreground mb-2 block">من</label>
               <div className="flex gap-2">
                 <input
+                  id="conv-from-amount"
                   type="number"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
@@ -45,6 +46,7 @@ const CurrencyConverter = () => {
                   dir="ltr"
                 />
                 <select
+                  aria-label="العملة المصدر"
                   value={fromCurrency}
                   onChange={(e) => setFromCurrency(e.target.value)}
                   className="bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
@@ -61,6 +63,7 @@ const CurrencyConverter = () => {
             {/* Swap button */}
             <button
               onClick={swap}
+              aria-label="تبديل العملات"
               className="bg-primary text-primary-foreground p-3 rounded-full hover:opacity-90 transition-opacity mt-4 md:mt-6"
             >
               <ArrowLeftRight className="w-5 h-5" />
@@ -68,9 +71,10 @@ const CurrencyConverter = () => {
 
             {/* To */}
             <div className="flex-1 w-full">
-              <label className="text-sm text-muted-foreground mb-2 block">إلى</label>
+              <label htmlFor="conv-to-amount" className="text-sm text-muted-foreground mb-2 block">إلى</label>
               <div className="flex gap-2">
                 <input
+                  id="conv-to-amount"
                   type="text"
                   value={converted.toLocaleString("en-US", { maximumFractionDigits: 2 })}
                   readOnly
@@ -78,6 +82,7 @@ const CurrencyConverter = () => {
                   dir="ltr"
                 />
                 <select
+                  aria-label="العملة الهدف"
                   value={toCurrency}
                   onChange={(e) => setToCurrency(e.target.value)}
                   className="bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
