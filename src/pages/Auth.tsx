@@ -3,6 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { Mail, Lock, User, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Helmet } from "react-helmet-async";
 
 const Auth = () => {
   const { user, loading } = useAuth();
@@ -46,11 +47,28 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4 geometric-pattern">
+      <Helmet>
+        <title>{isLogin ? "تسجيل الدخول | صراف" : "إنشاء حساب | صراف"}</title>
+        <meta
+          name="description"
+          content={isLogin
+            ? "سجّل الدخول إلى حسابك في صراف لإدارة طلبات تبادل العملات الرقمية والذهب والفضة بأمان."
+            : "أنشئ حساباً جديداً في صراف وابدأ بتبادل العملات الرقمية والذهب والفضة بأسعار لحظية موثوقة."}
+        />
+        <link rel="canonical" href="https://sarraf-connect-hub.lovable.app/auth" />
+        <meta property="og:title" content={isLogin ? "تسجيل الدخول | صراف" : "إنشاء حساب | صراف"} />
+        <meta property="og:description" content={isLogin ? "سجّل الدخول إلى حسابك في صراف." : "أنشئ حساباً جديداً في صراف."} />
+        <meta property="og:url" content="https://sarraf-connect-hub.lovable.app/auth" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <a href="/" className="text-4xl font-black gold-text">صَرّاف</a>
+          <h1 className="text-2xl font-bold text-foreground mt-4">
+            {isLogin ? "تسجيل الدخول" : "إنشاء حساب جديد"}
+          </h1>
           <p className="text-muted-foreground mt-2">
-            {isLogin ? "تسجيل الدخول إلى حسابك" : "إنشاء حساب جديد"}
+            {isLogin ? "ادخل إلى حسابك لإدارة طلباتك" : "ابدأ التبادل بأمان خلال دقائق"}
           </p>
         </div>
 
@@ -58,10 +76,11 @@ const Auth = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             {!isLogin && (
               <div>
-                <label className="text-sm text-muted-foreground mb-1.5 block">الاسم الكامل</label>
+                <label htmlFor="auth-fullname" className="text-sm text-muted-foreground mb-1.5 block">الاسم الكامل</label>
                 <div className="relative">
                   <User className="absolute right-3 top-3.5 w-4 h-4 text-muted-foreground" />
                   <input
+                    id="auth-fullname"
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
@@ -74,10 +93,11 @@ const Auth = () => {
             )}
 
             <div>
-              <label className="text-sm text-muted-foreground mb-1.5 block">البريد الإلكتروني</label>
+              <label htmlFor="auth-email" className="text-sm text-muted-foreground mb-1.5 block">البريد الإلكتروني</label>
               <div className="relative">
                 <Mail className="absolute right-3 top-3.5 w-4 h-4 text-muted-foreground" />
                 <input
+                  id="auth-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -90,10 +110,11 @@ const Auth = () => {
             </div>
 
             <div>
-              <label className="text-sm text-muted-foreground mb-1.5 block">كلمة المرور</label>
+              <label htmlFor="auth-password" className="text-sm text-muted-foreground mb-1.5 block">كلمة المرور</label>
               <div className="relative">
                 <Lock className="absolute right-3 top-3.5 w-4 h-4 text-muted-foreground" />
                 <input
+                  id="auth-password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
