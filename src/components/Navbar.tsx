@@ -38,6 +38,7 @@ const Navbar = () => {
               </Link>
               <button
                 onClick={signOut}
+                aria-label="تسجيل الخروج"
                 className="text-muted-foreground hover:text-destructive transition-colors"
               >
                 <LogOut className="w-4 h-4" />
@@ -55,7 +56,12 @@ const Navbar = () => {
         </div>
 
         {/* Mobile toggle */}
-        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
+        <button
+          onClick={() => setOpen(!open)}
+          aria-label={open ? "إغلاق القائمة" : "فتح القائمة"}
+          aria-expanded={open}
+          className="md:hidden text-foreground"
+        >
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
