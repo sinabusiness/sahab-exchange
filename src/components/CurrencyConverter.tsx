@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { ArrowLeftRight } from "lucide-react";
-import { fiatRates } from "@/hooks/useCryptoRates";
+import { useFiatRates } from "@/hooks/useCryptoRates";
 import { useTranslation } from "react-i18next";
-
-const currencies = [
-  { code: "USD", flag: "🇺🇸", rate: 1 },
-  ...fiatRates,
-];
 
 const CurrencyConverter = () => {
   const { t } = useTranslation();
+  const { data: fiatRates = [] } = useFiatRates();
+  const currencies = [{ code: "USD", flag: "🇺🇸", rate: 1 }, ...fiatRates];
   const [amount, setAmount] = useState("1000");
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("AED");
