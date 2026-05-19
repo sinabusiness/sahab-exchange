@@ -1,10 +1,12 @@
-import { useCryptoRates, metalRates, fiatRates } from "@/hooks/useCryptoRates";
+import { useCryptoRates, useMetalRates, useFiatRates } from "@/hooks/useCryptoRates";
 import { TrendingUp, TrendingDown, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const LiveRates = () => {
   const { t } = useTranslation();
   const { data: cryptoRates, isLoading } = useCryptoRates();
+  const { data: metalRates = [] } = useMetalRates();
+  const { data: fiatRates = [] } = useFiatRates();
 
   const formatPrice = (price: number) => {
     if (price >= 1000) return price.toLocaleString("en-US", { maximumFractionDigits: 0 });
