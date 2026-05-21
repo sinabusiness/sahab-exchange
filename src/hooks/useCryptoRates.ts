@@ -119,10 +119,27 @@ const fetchFiatRates = async (): Promise<FiatRate[]> => {
   if (!res.ok) throw new Error("fiat api");
   const data = await res.json();
   const rates = data?.rates || {};
-  const mapped = FIAT_DEFS.map((f) => ({
-    ...f,
-    rate: typeof rates[f.code] === "number" ? rates[f.code] : FIAT_FALLBACK_RATES[f.code],
-  }));
+  // open.er-api returns the OFFICIAL IRR rate (~42k-1.2M). We want the FREE-MARKET rate.
+  // Pull it from the Iranian exchanges edge function and override IRR.
+  let freeMarketIRR: number | null = null;
+  try {
+    const ir = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/iran-rates`, {
+      headers: { apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string },
+    });
+    if (ir.ok) {
+      const j = await ir.json();
+      if (typeof j?.average === "number" && j.average > 500_000) freeMarketIRR = j.average;
+    }
+  } catch {}
+  const mapped = FIAT_DEFS.map((f) => {
+    if (f.code === "IRR") {
+      return { ...f, rate: freeMarketIRR ?? FIAT_FALLBACK_RATES.IRR };
+    }
+    return {
+      ...f,
+      rate: typeof rates[f.code] === "number" ? rates[f.code] : FIAT_FALLBACK_RATES[f.code],
+    };
+  });
   writeCache("fiat", mapped);
   return mapped;
 };
