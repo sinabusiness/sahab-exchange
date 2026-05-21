@@ -7,6 +7,7 @@ import { Loader2, Plus, Clock, CheckCircle, XCircle, ArrowUpDown } from "lucide-
 import { useToast } from "@/hooks/use-toast";
 import { useCryptoRates, fiatRates } from "@/hooks/useCryptoRates";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 interface Order {
   id: string;
@@ -21,27 +22,32 @@ interface Order {
   created_at: string;
 }
 
-const statusIcons: Record<string, any> = {
-  pending: <Clock className="w-4 h-4 text-primary" />,
-  confirmed: <ArrowUpDown className="w-4 h-4 text-accent" />,
-  completed: <CheckCircle className="w-4 h-4 rate-positive" />,
-  cancelled: <XCircle className="w-4 h-4 rate-negative" />,
-};
-
-const statusLabels: Record<string, string> = {
-  pending: "قيد الانتظار",
-  confirmed: "مؤكد",
-  completed: "مكتمل",
-  cancelled: "ملغي",
-};
+const RTL = ["ar", "fa", "ur"];
 
 const Dashboard = () => {
   const { user, loading: authLoading } = useAuth();
+  const { t, i18n } = useTranslation();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const { toast } = useToast();
   const { data: cryptoRates } = useCryptoRates();
+
+  const isRtl = RTL.includes(i18n.language?.split("-")[0] || "en");
+  const align = isRtl ? "text-right" : "text-left";
+
+  const statusIcons: Record<string, any> = {
+    pending: <Clock className="w-4 h-4 text-primary" />,
+    confirmed: <ArrowUpDown className="w-4 h-4 text-accent" />,
+    completed: <CheckCircle className="w-4 h-4 rate-positive" />,
+    cancelled: <XCircle className="w-4 h-4 rate-negative" />,
+  };
+  const statusLabels: Record<string, string> = {
+    pending: t("dashboard.statusPending"),
+    confirmed: t("dashboard.statusConfirmed"),
+    completed: t("dashboard.statusCompleted"),
+    cancelled: t("dashboard.statusCancelled"),
+  };
 
   // New order form
   const [orderType, setOrderType] = useState<"buy" | "sell">("buy");
@@ -51,9 +57,9 @@ const Dashboard = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const allCurrencies = [
-    { code: "USD", label: "USD - دولار" },
+    { code: "USD", label: "USD - USD" },
     ...fiatRates.map((f) => ({ code: f.code, label: `${f.code} - ${f.nameAr}` })),
-    ...(cryptoRates || []).map((c) => ({ code: c.symbol, label: `${c.symbol} - ${c.nameAr}` })),
+    ...(cryptoRates || []).map((c) => ({ code: c.symbol, label: `${c.symbol} - ${c.name}` })),
   ];
 
   useEffect(() => {
@@ -108,9 +114,9 @@ const Dashboard = () => {
     });
 
     if (error) {
-      toast({ title: "خطأ", description: error.message, variant: "destructive" });
+      toast({ title: t("dashboard.error"), description: error.message, variant: "destructive" });
     } else {
-      toast({ title: "تم إنشاء الطلب بنجاح" });
+      toast({ title: t("dashboard.createSuccess") });
       setShowForm(false);
       setAmount("");
       fetchOrders();
@@ -131,36 +137,29 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>لوحة التحكم | صراف</title>
-        <meta name="description" content="أدر طلبات تبادل العملات الرقمية والذهب والفضة الخاصة بك في صراف، وتابع حالة كل عملية بشكل لحظي." />
-        <link rel="canonical" href="https://sarraf-connect-hub.lovable.app/dashboard" />
+        <title>{t("dashboard.title")} | {t("brand")}</title>
         <meta name="robots" content="noindex" />
-        <meta property="og:title" content="لوحة التحكم | صراف" />
-        <meta property="og:description" content="أدر طلبات التبادل وتابع حالتها لحظياً." />
-        <meta property="og:url" content="https://sarraf-connect-hub.lovable.app/dashboard" />
-        <meta property="og:type" content="website" />
       </Helmet>
       <Navbar />
       <div className="pt-24 px-4 pb-12">
         <div className="container max-w-5xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
             <div>
-              <h1 className="text-3xl font-bold gold-text">لوحة التحكم</h1>
-              <p className="text-muted-foreground text-sm mt-1">{user.email}</p>
+              <h1 className="text-3xl font-bold gold-text">{t("dashboard.title")}</h1>
+              <p className="text-muted-foreground text-sm mt-1" dir="ltr">{user.email}</p>
             </div>
             <button
               onClick={() => setShowForm(!showForm)}
               className="gold-gradient text-primary-foreground px-6 py-3 rounded-xl font-bold hover:opacity-90 transition-opacity flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              طلب جديد
+              {t("dashboard.newOrder")}
             </button>
           </div>
 
-          {/* New Order Form */}
           {showForm && (
             <div className="bg-card border border-border rounded-2xl p-6 mb-8 gold-glow">
-              <h2 className="text-lg font-bold mb-4">إنشاء طلب تحويل</h2>
+              <h2 className="text-lg font-bold mb-4">{t("dashboard.createOrder")}</h2>
               <form onSubmit={handleCreateOrder} className="space-y-4">
                 <div className="flex gap-4">
                   <button
@@ -172,7 +171,7 @@ const Dashboard = () => {
                         : "bg-secondary text-muted-foreground"
                     }`}
                   >
-                    شراء
+                    {t("dashboard.buy")}
                   </button>
                   <button
                     type="button"
@@ -183,97 +182,68 @@ const Dashboard = () => {
                         : "bg-secondary text-muted-foreground"
                     }`}
                   >
-                    بيع
+                    {t("dashboard.sell")}
                   </button>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label htmlFor="order-from" className="text-sm text-muted-foreground mb-1 block">من العملة</label>
-                    <select
-                      id="order-from"
-                      value={fromCurrency}
-                      onChange={(e) => setFromCurrency(e.target.value)}
-                      className="w-full bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                    >
-                      {allCurrencies.map((c) => (
-                        <option key={c.code} value={c.code}>{c.label}</option>
-                      ))}
+                    <label htmlFor="order-from" className="text-sm text-muted-foreground mb-1 block">{t("dashboard.fromCurrency")}</label>
+                    <select id="order-from" value={fromCurrency} onChange={(e) => setFromCurrency(e.target.value)}
+                      className="w-full bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+                      {allCurrencies.map((c) => (<option key={c.code} value={c.code}>{c.label}</option>))}
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="order-to" className="text-sm text-muted-foreground mb-1 block">إلى العملة</label>
-                    <select
-                      id="order-to"
-                      value={toCurrency}
-                      onChange={(e) => setToCurrency(e.target.value)}
-                      className="w-full bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                    >
-                      {allCurrencies.map((c) => (
-                        <option key={c.code} value={c.code}>{c.label}</option>
-                      ))}
+                    <label htmlFor="order-to" className="text-sm text-muted-foreground mb-1 block">{t("dashboard.toCurrency")}</label>
+                    <select id="order-to" value={toCurrency} onChange={(e) => setToCurrency(e.target.value)}
+                      className="w-full bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary">
+                      {allCurrencies.map((c) => (<option key={c.code} value={c.code}>{c.label}</option>))}
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="order-amount" className="text-sm text-muted-foreground mb-1 block">المبلغ</label>
-                    <input
-                      id="order-amount"
-                      type="number"
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                      required
-                      min="0.0001"
-                      step="any"
-                      dir="ltr"
-                      className="w-full bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
+                    <label htmlFor="order-amount" className="text-sm text-muted-foreground mb-1 block">{t("dashboard.amount")}</label>
+                    <input id="order-amount" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} required min="0.0001" step="any" dir="ltr"
+                      className="w-full bg-secondary border border-border rounded-lg px-3 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary" />
                   </div>
                 </div>
 
                 {amount && (
                   <p className="text-sm text-muted-foreground">
-                    السعر التقريبي: {(parseFloat(amount) * getRate(fromCurrency, toCurrency)).toLocaleString("en-US", { maximumFractionDigits: 8 })} {toCurrency}
+                    {t("dashboard.approxRate")}: {(parseFloat(amount) * getRate(fromCurrency, toCurrency)).toLocaleString("en-US", { maximumFractionDigits: 8 })} {toCurrency}
                   </p>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full gold-gradient text-primary-foreground py-3 rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
-                >
+                <button type="submit" disabled={submitting}
+                  className="w-full gold-gradient text-primary-foreground py-3 rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2">
                   {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-                  إرسال الطلب
+                  {t("dashboard.submit")}
                 </button>
               </form>
             </div>
           )}
 
-          {/* Orders Table */}
           <div className="bg-card border border-border rounded-2xl overflow-hidden">
             <div className="p-6 border-b border-border">
-              <h2 className="text-lg font-bold">طلباتي</h2>
+              <h2 className="text-lg font-bold">{t("dashboard.myOrders")}</h2>
             </div>
 
             {loadingOrders ? (
-              <div className="p-12 text-center">
-                <Loader2 className="w-6 h-6 animate-spin text-primary mx-auto" />
-              </div>
+              <div className="p-12 text-center"><Loader2 className="w-6 h-6 animate-spin text-primary mx-auto" /></div>
             ) : orders.length === 0 ? (
-              <div className="p-12 text-center text-muted-foreground">
-                لا توجد طلبات بعد. أنشئ طلبك الأول!
-              </div>
+              <div className="p-12 text-center text-muted-foreground">{t("dashboard.noOrders")}</div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-border text-sm text-muted-foreground">
-                      <th className="px-6 py-3 text-right">النوع</th>
-                      <th className="px-6 py-3 text-right">من</th>
-                      <th className="px-6 py-3 text-right">إلى</th>
-                      <th className="px-6 py-3 text-right">المبلغ</th>
-                      <th className="px-6 py-3 text-right">الإجمالي</th>
-                      <th className="px-6 py-3 text-right">الحالة</th>
-                      <th className="px-6 py-3 text-right">التاريخ</th>
+                    <tr className={`border-b border-border text-sm text-muted-foreground`}>
+                      <th className={`px-6 py-3 ${align}`}>{t("dashboard.type")}</th>
+                      <th className={`px-6 py-3 ${align}`}>{t("dashboard.from")}</th>
+                      <th className={`px-6 py-3 ${align}`}>{t("dashboard.to")}</th>
+                      <th className={`px-6 py-3 ${align}`}>{t("dashboard.amount")}</th>
+                      <th className={`px-6 py-3 ${align}`}>{t("dashboard.total")}</th>
+                      <th className={`px-6 py-3 ${align}`}>{t("dashboard.status")}</th>
+                      <th className={`px-6 py-3 ${align}`}>{t("dashboard.date")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -281,7 +251,7 @@ const Dashboard = () => {
                       <tr key={order.id} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
                         <td className="px-6 py-4">
                           <span className={`text-sm font-semibold ${order.order_type === "buy" ? "rate-positive" : "rate-negative"}`}>
-                            {order.order_type === "buy" ? "شراء" : "بيع"}
+                            {order.order_type === "buy" ? t("dashboard.buy") : t("dashboard.sell")}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-sm">{order.from_currency}</td>
@@ -295,7 +265,7 @@ const Dashboard = () => {
                           </span>
                         </td>
                         <td className="px-6 py-4 text-sm text-muted-foreground" dir="ltr">
-                          {new Date(order.created_at).toLocaleDateString("ar-EG")}
+                          {new Date(order.created_at).toLocaleDateString(i18n.language || "en")}
                         </td>
                       </tr>
                     ))}
