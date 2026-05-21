@@ -84,7 +84,7 @@ const FIAT_DEFS: Omit<FiatRate, "rate">[] = [
 
 const FIAT_FALLBACK_RATES: Record<string, number> = {
   AED: 3.67, SAR: 3.75, KWD: 0.308, QAR: 3.64, BHD: 0.376,
-  OMR: 0.385, EGP: 53.1, IRR: 1216916, IQD: 1311, TRY: 45.6,
+  OMR: 0.385, EGP: 53.1, IRR: 1780000, IQD: 1311, TRY: 45.6,
 };
 
 export const fiatRates: FiatRate[] = FIAT_DEFS.map((f) => ({ ...f, rate: FIAT_FALLBACK_RATES[f.code] }));
