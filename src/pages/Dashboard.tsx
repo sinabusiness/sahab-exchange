@@ -111,7 +111,7 @@ const Dashboard = () => {
 
     if (error || (data as any)?.error) {
       console.error("create-order failed", error || (data as any)?.error);
-      toast({ title: t("dashboard.error"), description: t("dashboard.createFailed"), variant: "destructive" });
+      toast({ title: t("dashboard.error"), description: t("dashboard.createFailed", { defaultValue: "Could not create order. Please try again." }), variant: "destructive" });
     } else {
       toast({ title: t("dashboard.createSuccess") });
       setShowForm(false);

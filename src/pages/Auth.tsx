@@ -36,13 +36,13 @@ const Auth = () => {
       const { error } = await signIn(email, password);
       if (error) {
         console.error("sign-in error", error);
-        toast({ title: t("auth.loginErr"), description: t("auth.loginErrGeneric"), variant: "destructive" });
+        toast({ title: t("auth.loginErr"), description: t("auth.loginErrGeneric", { defaultValue: "Invalid email or password." }), variant: "destructive" });
       }
     } else {
       const { error } = await signUp(email, password, fullName);
       if (error) {
         console.error("sign-up error", error);
-        toast({ title: t("auth.signupErr"), description: t("auth.signupErrGeneric"), variant: "destructive" });
+        toast({ title: t("auth.signupErr"), description: t("auth.signupErrGeneric", { defaultValue: "Registration failed. Please try again." }), variant: "destructive" });
       } else {
         toast({ title: t("auth.signupOk"), description: t("auth.signupOkDesc") });
       }
