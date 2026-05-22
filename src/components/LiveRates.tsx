@@ -1,4 +1,4 @@
-import { useCryptoRates, useMetalRates, useFiatRates, useIranRates } from "@/hooks/useCryptoRates";
+import { useCryptoRates, useMetalRates, useFiatRates } from "@/hooks/useCryptoRates";
 import { TrendingUp, TrendingDown, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -7,7 +7,6 @@ const LiveRates = () => {
   const { data: cryptoRates, isLoading } = useCryptoRates();
   const { data: metalRates = [] } = useMetalRates();
   const { data: fiatRates = [] } = useFiatRates();
-  const { data: iranRates = [] } = useIranRates();
 
   const formatPrice = (price: number) => {
     if (price >= 1000) return price.toLocaleString("en-US", { maximumFractionDigits: 0 });
@@ -65,25 +64,6 @@ const LiveRates = () => {
           ))}
         </div>
 
-        {iranRates.length > 0 && (
-          <div className="mb-12 sm:mb-16">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-2 gold-text">USDT / تومان · ریال 🇮🇷</h3>
-            <p className="text-muted-foreground text-center mb-6 text-sm">از صرافی‌های ایرانی (نوبیتکس، والکس، بیت‌پین)</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
-              {iranRates.map((r) => (
-                <div key={r.source} className="bg-card border border-border rounded-xl p-5 card-hover text-center">
-                  <div className="text-xs text-muted-foreground mb-1">{r.source}</div>
-                  <div className="text-xl font-bold text-primary" dir="ltr">
-                    {Math.round(r.price).toLocaleString("en-US")} IRR
-                  </div>
-                  <div className="text-xs text-muted-foreground mt-1" dir="ltr">
-                    ≈ {Math.round(r.price / 10).toLocaleString("en-US")} تومان
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 gold-text">{t("rates.fiatTitle")}</h2>
         <p className="text-muted-foreground text-center mb-8 sm:mb-10">{t("rates.fiatSub")}</p>
