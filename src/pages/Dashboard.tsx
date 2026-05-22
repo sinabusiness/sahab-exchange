@@ -100,21 +100,18 @@ const Dashboard = () => {
     if (!user) return;
     setSubmitting(true);
 
-    const rate = getRate(fromCurrency, toCurrency);
-    const total = parseFloat(amount) * rate;
-
-    const { error } = await supabase.from("orders").insert({
-      user_id: user.id,
-      order_type: orderType,
-      from_currency: fromCurrency,
-      to_currency: toCurrency,
-      amount: parseFloat(amount),
-      rate,
-      total,
+    const { data, error } = await supabase.functions.invoke("create-order", {
+      body: {
+        order_type: orderType,
+        from_currency: fromCurrency,
+        to_currency: toCurrency,
+        amount: parseFloat(amount),
+      },
     });
 
-    if (error) {
-      toast({ title: t("dashboard.error"), description: error.message, variant: "destructive" });
+    if (error || (data as any)?.error) {
+      console.error("create-order failed", error || (data as any)?.error);
+      toast({ title: t("dashboard.error"), description: t("dashboard.createFailed"), variant: "destructive" });
     } else {
       toast({ title: t("dashboard.createSuccess") });
       setShowForm(false);
