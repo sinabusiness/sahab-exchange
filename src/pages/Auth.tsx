@@ -35,12 +35,14 @@ const Auth = () => {
     if (isLogin) {
       const { error } = await signIn(email, password);
       if (error) {
-        toast({ title: t("auth.loginErr"), description: error.message, variant: "destructive" });
+        console.error("sign-in error", error);
+        toast({ title: t("auth.loginErr"), description: t("auth.loginErrGeneric"), variant: "destructive" });
       }
     } else {
       const { error } = await signUp(email, password, fullName);
       if (error) {
-        toast({ title: t("auth.signupErr"), description: error.message, variant: "destructive" });
+        console.error("sign-up error", error);
+        toast({ title: t("auth.signupErr"), description: t("auth.signupErrGeneric"), variant: "destructive" });
       } else {
         toast({ title: t("auth.signupOk"), description: t("auth.signupOkDesc") });
       }
