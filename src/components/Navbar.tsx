@@ -11,10 +11,10 @@ const Navbar = () => {
   const { t } = useTranslation();
 
   const links = [
-    { href: "#rates", label: t("nav.rates") },
-    { href: "#converter", label: t("nav.converter") },
-    { href: "#services", label: t("nav.services") },
-    { href: "#contact", label: t("nav.contact") },
+    { href: "/#rates", label: t("nav.rates") },
+    { href: "/#converter", label: t("nav.converter") },
+    { href: "/#services", label: t("nav.services") },
+    { href: "/#contact", label: t("nav.contact") },
   ];
 
   return (
