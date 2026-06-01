@@ -23,7 +23,7 @@ const Footer = () => {
             {t("footer.whatsapp")} +98 913 159 5717
           </a>
           <a
-            href="mailto:support@xn--mgbx4cd0ab.com"
+            href="mailto:support@xn--mgbtl4c.com"
             dir="ltr"
             className="w-full sm:w-auto border border-primary/40 text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-primary/10 transition-colors inline-flex items-center justify-center gap-3"
           >
