@@ -13,20 +13,22 @@ const Footer = () => {
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-10 sm:mb-12">
           <a
-            href="https://wa.me/1234567890"
+            href="https://wa.me/989131595717"
             target="_blank"
             rel="noopener noreferrer"
+            dir="ltr"
             className="w-full sm:w-auto gold-gradient text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:opacity-90 transition-opacity inline-flex items-center justify-center gap-3 text-base sm:text-lg"
           >
             <MessageCircle className="w-5 h-5" />
-            {t("footer.whatsapp")}
+            {t("footer.whatsapp")} +98 913 159 5717
           </a>
           <a
-            href="mailto:info@xn--mgbqp7cs.com"
+            href="mailto:support@xn--mgbx4cd0ab.com"
+            dir="ltr"
             className="w-full sm:w-auto border border-primary/40 text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-primary/10 transition-colors inline-flex items-center justify-center gap-3"
           >
             <Mail className="w-5 h-5" />
-            {t("footer.email")}
+            support@صراف.com
           </a>
         </div>
 
