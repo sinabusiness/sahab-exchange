@@ -22,7 +22,7 @@ This guide deploys the full app — frontend, database, auth, and the `live-rate
 
 1. Click **Publish** (top-right of editor). App goes live at `sarraf-connect-hub.lovable.app`.
 2. Open **Project Settings → Domains → Connect Domain**.
-3. Enter `صراف.com` (Punycode: `xn--mgbx4cd0ab.com`).
+3. Enter `صراف.com` (Punycode: `xn--mgbtl4c.com`).
 4. At your domain registrar, add the DNS records Lovable shows you:
    - **A** record `@` → `185.158.133.1`
    - **A** record `www` → `185.158.133.1`
@@ -57,12 +57,12 @@ Use this if you want CDN-edge hosting under your own Cloudflare account.
 - Deploy. You'll get `sarraf.pages.dev`.
 
 ### 3. Add صراف.com to Cloudflare
-- Cloudflare dashboard → **Add Site** → `xn--mgbx4cd0ab.com` (or paste صراف.com, it converts automatically).
+- Cloudflare dashboard → **Add Site** → `xn--mgbtl4c.com` (or paste صراف.com, it converts automatically).
 - Cloudflare gives you 2 nameservers. Go to your registrar (where you bought the domain) and **replace its nameservers** with Cloudflare's.
 - Wait for DNS to switch (minutes to hours).
 
 ### 4. Attach domain to Pages
-- In the Pages project → **Custom domains → Set up a custom domain** → enter `xn--mgbx4cd0ab.com` and also `www.xn--mgbx4cd0ab.com`.
+- In the Pages project → **Custom domains → Set up a custom domain** → enter `xn--mgbtl4c.com` and also `www.xn--mgbtl4c.com`.
 - Cloudflare auto-creates DNS + SSL. No A records to manage manually.
 
 SPA deep-link routing and HTTPS work automatically.
