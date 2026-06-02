@@ -72,7 +72,7 @@ I already added `public/_redirects` so deep links (e.g. `/dashboard`) work after
 ## STEP 4 — Connect صراف.com (free SSL + DNS via Cloudflare)
 
 ### 4a. Add the site to Cloudflare
-1. Cloudflare dashboard → **Add a site** → type `صراف.com` (it auto-converts to Punycode `xn--mgbx4cd0ab.com`).
+1. Cloudflare dashboard → **Add a site** → type `صراف.com` (it auto-converts to Punycode `xn--mgbtl4c.com`).
 2. Pick the **Free** plan.
 3. Cloudflare gives you **2 nameservers** (something like `xxx.ns.cloudflare.com`).
 4. Log in to **your domain registrar** (wherever you bought صراف.com) → **change the nameservers** to the two Cloudflare gave you.
@@ -80,8 +80,8 @@ I already added `public/_redirects` so deep links (e.g. `/dashboard`) work after
 
 ### 4b. Point the domain to your Pages site
 1. In Cloudflare → Workers & Pages → your `sarraf` project → **Custom domains** → **Set up a custom domain**.
-2. Enter `xn--mgbx4cd0ab.com` (the Punycode form of صراف.com). Click Continue. Cloudflare auto-creates the DNS record + SSL certificate.
-3. Repeat for `www.xn--mgbx4cd0ab.com` so `www.صراف.com` also works.
+2. Enter `xn--mgbtl4c.com` (the Punycode form of صراف.com). Click Continue. Cloudflare auto-creates the DNS record + SSL certificate.
+3. Repeat for `www.xn--mgbtl4c.com` so `www.صراف.com` also works.
 
 Within a few minutes صراف.com is live with HTTPS. ✅
 
@@ -95,8 +95,8 @@ Inside Lovable, just tell me **"add صراف.com to allowed redirect URLs"** and
    ```
    https://صراف.com/**
    https://www.صراف.com/**
-   https://xn--mgbx4cd0ab.com/**
-   https://www.xn--mgbx4cd0ab.com/**
+   https://xn--mgbtl4c.com/**
+   https://www.xn--mgbtl4c.com/**
    https://sarraf.pages.dev/**
    ```
 
