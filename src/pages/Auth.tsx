@@ -39,12 +39,23 @@ const Auth = () => {
         toast({ title: t("auth.loginErr"), description: t("auth.loginErrGeneric", { defaultValue: "Invalid email or password." }), variant: "destructive" });
       }
     } else {
-      const { error } = await signUp(email, password, fullName);
+      const { error, needsEmailConfirmation } = await signUp(email, password, fullName);
       if (error) {
         console.error("sign-up error", error);
-        toast({ title: t("auth.signupErr"), description: t("auth.signupErrGeneric", { defaultValue: "Registration failed. Please try again." }), variant: "destructive" });
+        toast({
+          title: t("auth.signupErr"),
+          description: error.message || t("auth.signupErrGeneric", { defaultValue: "Registration failed. Please try again." }),
+          variant: "destructive"
+        });
       } else {
-        toast({ title: t("auth.signupOk"), description: t("auth.signupOkDesc") });
+        toast({
+          title: t("auth.signupOk"),
+          description: needsEmailConfirmation
+            ? t("auth.signupOkDesc", { defaultValue: "Your account was created. Please confirm your email before signing in." })
+            : t("auth.signupOkDesc")
+        });
+        setIsLogin(true);
+        setPassword("");
       }
     }
     setSubmitting(false);
