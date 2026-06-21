@@ -21,7 +21,7 @@ type Dict = {
   converter: { title: string; subtitle: string; from: string; to: string; fromAria: string; toAria: string; swap: string; disclaimer: string };
   services: { title: string; subtitle: string; items: { title: string; desc: string }[] };
   footer: { title: string; subtitle: string; whatsapp: string; email: string; rights: string };
-  auth: { loginTitle: string; signupTitle: string; loginSub: string; signupSub: string; fullName: string; fullNamePh: string; email: string; password: string; submitLogin: string; submitSignup: string; toLogin: string; toSignup: string; loginErr: string; signupErr: string; signupOk: string; signupOkDesc: string };
+  auth: { loginTitle: string; signupTitle: string; loginSub: string; signupSub: string; fullName: string; fullNamePh: string; email: string; password: string; submitLogin: string; submitSignup: string; toLogin: string; toSignup: string; loginErr: string; signupErr: string; signupOk: string; signupOkDesc: string; forgotPassword: string; resetDesc: string; resetSubmit: string; resetSent: string; resetSentDesc: string };
 };
 
 const en: Dict = {
@@ -39,7 +39,7 @@ const en: Dict = {
     { title: "24/7 support", desc: "Dedicated multilingual support team around the clock" },
   ]},
   footer: { title: "Contact us", subtitle: "We're here to help anytime", whatsapp: "Chat on WhatsApp", email: "Email us", rights: "© 2026 Sarraf. All rights reserved" },
-  auth: { loginTitle: "Sign in", signupTitle: "Create account", loginSub: "Access your account to manage orders", signupSub: "Start trading safely in minutes", fullName: "Full name", fullNamePh: "Your name", email: "Email", password: "Password", submitLogin: "Sign in", submitSignup: "Create account", toLogin: "Have an account? Sign in", toSignup: "No account? Sign up now", loginErr: "Sign-in error", signupErr: "Sign-up error", signupOk: "Account created", signupOkDesc: "Check your email to verify your account" },
+  auth: { loginTitle: "Sign in", signupTitle: "Create account", loginSub: "Access your account to manage orders", signupSub: "Start trading safely in minutes", fullName: "Full name", fullNamePh: "Your name", email: "Email", password: "Password", submitLogin: "Sign in", submitSignup: "Create account", toLogin: "Have an account? Sign in", toSignup: "No account? Sign up now", loginErr: "Sign-in error", signupErr: "Sign-up error", signupOk: "Account created", signupOkDesc: "Check your email to verify your account", forgotPassword: "Forgot password?", resetDesc: "Enter your email and we'll send you a link to reset your password.", resetSubmit: "Send reset link", resetSent: "Email sent!", resetSentDesc: "Check your inbox for the password reset link." },
 };
 
 const ar: Dict = {
@@ -57,7 +57,7 @@ const ar: Dict = {
     { title: "دعم على مدار الساعة", desc: "فريق دعم متخصص بالعربية والفارسية 24/7" },
   ]},
   footer: { title: "تواصل معنا", subtitle: "نحن هنا لمساعدتك في أي وقت", whatsapp: "تواصل عبر واتساب", email: "البريد الإلكتروني", rights: "© 2026 صراف. جميع الحقوق محفوظة" },
-  auth: { loginTitle: "تسجيل الدخول", signupTitle: "إنشاء حساب جديد", loginSub: "ادخل إلى حسابك لإدارة طلباتك", signupSub: "ابدأ التبادل بأمان خلال دقائق", fullName: "الاسم الكامل", fullNamePh: "أدخل اسمك", email: "البريد الإلكتروني", password: "كلمة المرور", submitLogin: "تسجيل الدخول", submitSignup: "إنشاء حساب", toLogin: "لديك حساب؟ سجّل الدخول", toSignup: "ليس لديك حساب؟ سجّل الآن", loginErr: "خطأ في الدخول", signupErr: "خطأ في التسجيل", signupOk: "تم التسجيل بنجاح", signupOkDesc: "تحقق من بريدك الإلكتروني لتأكيد الحساب" },
+  auth: { loginTitle: "تسجيل الدخول", signupTitle: "إنشاء حساب جديد", loginSub: "ادخل إلى حسابك لإدارة طلباتك", signupSub: "ابدأ التبادل بأمان خلال دقائق", fullName: "الاسم الكامل", fullNamePh: "أدخل اسمك", email: "البريد الإلكتروني", password: "كلمة المرور", submitLogin: "تسجيل الدخول", submitSignup: "إنشاء حساب", toLogin: "لديك حساب؟ سجّل الدخول", toSignup: "ليس لديك حساب؟ سجّل الآن", loginErr: "خطأ في الدخول", signupErr: "خطأ في التسجيل", signupOk: "تم التسجيل بنجاح", signupOkDesc: "تحقق من بريدك الإلكتروني لتأكيد الحساب", forgotPassword: "نسيت كلمة المرور؟", resetDesc: "أدخل بريدك الإلكتروني وسنرسل لك رابط لإعادة تعيين كلمة المرور.", resetSubmit: "إرسال رابط الإعادة", resetSent: "تم الإرسال!", resetSentDesc: "تحقق من بريدك الإلكتروني للحصول على رابط إعادة تعيين كلمة المرور." },
 };
 
 const fa: Dict = {
@@ -75,7 +75,7 @@ const fa: Dict = {
     { title: "پشتیبانی ۲۴ ساعته", desc: "تیم پشتیبانی چندزبانه در تمام ساعات شبانه‌روز" },
   ]},
   footer: { title: "با ما در تماس باشید", subtitle: "ما هر زمان آماده کمک هستیم", whatsapp: "گفتگو در واتساپ", email: "ایمیل", rights: "© ۲۰۲۶ صراف. تمامی حقوق محفوظ است" },
-  auth: { loginTitle: "ورود", signupTitle: "ایجاد حساب جدید", loginSub: "برای مدیریت سفارش‌ها وارد شوید", signupSub: "در چند دقیقه به‌صورت امن آغاز کنید", fullName: "نام کامل", fullNamePh: "نام خود را وارد کنید", email: "ایمیل", password: "رمز عبور", submitLogin: "ورود", submitSignup: "ایجاد حساب", toLogin: "حساب دارید؟ وارد شوید", toSignup: "حساب ندارید؟ اکنون ثبت‌نام کنید", loginErr: "خطا در ورود", signupErr: "خطا در ثبت‌نام", signupOk: "حساب با موفقیت ایجاد شد", signupOkDesc: "ایمیل خود را برای تایید حساب بررسی کنید" },
+  auth: { loginTitle: "ورود", signupTitle: "ایجاد حساب جدید", loginSub: "برای مدیریت سفارش‌ها وارد شوید", signupSub: "در چند دقیقه به‌صورت امن آغاز کنید", fullName: "نام کامل", fullNamePh: "نام خود را وارد کنید", email: "ایمیل", password: "رمز عبور", submitLogin: "ورود", submitSignup: "ایجاد حساب", toLogin: "حساب دارید؟ وارد شوید", toSignup: "حساب ندارید؟ اکنون ثبت‌نام کنید", loginErr: "خطا در ورود", signupErr: "خطا در ثبت‌نام", signupOk: "حساب با موفقیت ایجاد شد", signupOkDesc: "ایمیل خود را برای تایید حساب بررسی کنید", forgotPassword: "رمز عبور را فراموش کردید؟", resetDesc: "ایمیل خود را وارد کنید تا لینک بازیابی رمز عبور برایتان ارسال شود.", resetSubmit: "ارسال لینک بازیابی", resetSent: "ایمیل ارسال شد!", resetSentDesc: "ایمیل خود را برای دریافت لینک بازیابی رمز عبور بررسی کنید." },
 };
 
 const ur: Dict = {
@@ -93,7 +93,7 @@ const ur: Dict = {
     { title: "24/7 سپورٹ", desc: "چوبیس گھنٹے کثیر اللسانی سپورٹ ٹیم" },
   ]},
   footer: { title: "ہم سے رابطہ کریں", subtitle: "ہم ہر وقت مدد کے لیے حاضر ہیں", whatsapp: "واٹس ایپ پر چیٹ کریں", email: "ای میل", rights: "© 2026 صراف۔ جملہ حقوق محفوظ ہیں" },
-  auth: { loginTitle: "لاگ ان", signupTitle: "نیا اکاؤنٹ بنائیں", loginSub: "آرڈرز منظم کرنے کے لیے لاگ ان کریں", signupSub: "منٹوں میں محفوظ طریقے سے شروع کریں", fullName: "پورا نام", fullNamePh: "اپنا نام درج کریں", email: "ای میل", password: "پاس ورڈ", submitLogin: "لاگ ان", submitSignup: "اکاؤنٹ بنائیں", toLogin: "اکاؤنٹ ہے؟ لاگ ان کریں", toSignup: "اکاؤنٹ نہیں؟ ابھی رجسٹر کریں", loginErr: "لاگ ان میں خرابی", signupErr: "رجسٹریشن میں خرابی", signupOk: "اکاؤنٹ بن گیا", signupOkDesc: "اپنے اکاؤنٹ کی تصدیق کے لیے ای میل دیکھیں" },
+  auth: { loginTitle: "لاگ ان", signupTitle: "نیا اکاؤنٹ بنائیں", loginSub: "آرڈرز منظم کرنے کے لیے لاگ ان کریں", signupSub: "منٹوں میں محفوظ طریقے سے شروع کریں", fullName: "پورا نام", fullNamePh: "اپنا نام درج کریں", email: "ای میل", password: "پاس ورڈ", submitLogin: "لاگ ان", submitSignup: "اکاؤنٹ بنائیں", toLogin: "اکاؤنٹ ہے؟ لاگ ان کریں", toSignup: "اکاؤنٹ نہیں؟ ابھی رجسٹر کریں", loginErr: "لاگ ان میں خرابی", signupErr: "رجسٹریشن میں خرابی", signupOk: "اکاؤنٹ بن گیا", signupOkDesc: "اپنے اکاؤنٹ کی تصدیق کے لیے ای میل دیکھیں", forgotPassword: "پاس ورڈ بھول گئے؟", resetDesc: "اپنا ای میل درج کریں اور ہم آپ کو پاس ورڈ ری سیٹ لنک بھیجیں گے۔", resetSubmit: "ری سیٹ لنک بھیجیں", resetSent: "ای میل بھیج دیا گیا!", resetSentDesc: "پاس ورڈ ری سیٹ لنک کے لیے اپنا ان باکس چیک کریں۔" },
 };
 
 const ru: Dict = {
@@ -111,7 +111,7 @@ const ru: Dict = {
     { title: "Поддержка 24/7", desc: "Многоязычная команда поддержки круглосуточно" },
   ]},
   footer: { title: "Свяжитесь с нами", subtitle: "Мы всегда готовы помочь", whatsapp: "Написать в WhatsApp", email: "Электронная почта", rights: "© 2026 Sarraf. Все права защищены" },
-  auth: { loginTitle: "Вход", signupTitle: "Создать аккаунт", loginSub: "Войдите для управления заказами", signupSub: "Начните торговлю безопасно за минуты", fullName: "Полное имя", fullNamePh: "Введите ваше имя", email: "Email", password: "Пароль", submitLogin: "Войти", submitSignup: "Создать аккаунт", toLogin: "Уже есть аккаунт? Войти", toSignup: "Нет аккаунта? Зарегистрироваться", loginErr: "Ошибка входа", signupErr: "Ошибка регистрации", signupOk: "Регистрация успешна", signupOkDesc: "Проверьте email для подтверждения аккаунта" },
+  auth: { loginTitle: "Вход", signupTitle: "Создать аккаунт", loginSub: "Войдите для управления заказами", signupSub: "Начните торговлю безопасно за минуты", fullName: "Полное имя", fullNamePh: "Введите ваше имя", email: "Email", password: "Пароль", submitLogin: "Войти", submitSignup: "Создать аккаунт", toLogin: "Уже есть аккаунт? Войти", toSignup: "Нет аккаунта? Зарегистрироваться", loginErr: "Ошибка входа", signupErr: "Ошибка регистрации", signupOk: "Регистрация успешна", signupOkDesc: "Проверьте email для подтверждения аккаунта", forgotPassword: "Забыли пароль?", resetDesc: "Введите email, и мы отправим ссылку для сброса пароля.", resetSubmit: "Отправить ссылку", resetSent: "Письмо отправлено!", resetSentDesc: "Проверьте почту для ссылки на сброс пароля." },
 };
 
 const zh: Dict = {
@@ -129,7 +129,7 @@ const zh: Dict = {
     { title: "全天候支持", desc: "多语种支持团队全天候服务" },
   ]},
   footer: { title: "联系我们", subtitle: "我们随时为您提供帮助", whatsapp: "WhatsApp 聊天", email: "电子邮件", rights: "© 2026 Sarraf。版权所有" },
-  auth: { loginTitle: "登录", signupTitle: "创建账户", loginSub: "登录以管理您的订单", signupSub: "几分钟内安全开始交易", fullName: "全名", fullNamePh: "请输入您的姓名", email: "电子邮件", password: "密码", submitLogin: "登录", submitSignup: "创建账户", toLogin: "已有账户？登录", toSignup: "没有账户？立即注册", loginErr: "登录错误", signupErr: "注册错误", signupOk: "账户已创建", signupOkDesc: "请检查邮箱以验证您的账户" },
+  auth: { loginTitle: "登录", signupTitle: "创建账户", loginSub: "登录以管理您的订单", signupSub: "几分钟内安全开始交易", fullName: "全名", fullNamePh: "请输入您的姓名", email: "电子邮件", password: "密码", submitLogin: "登录", submitSignup: "创建账户", toLogin: "已有账户？登录", toSignup: "没有账户？立即注册", loginErr: "登录错误", signupErr: "注册错误", signupOk: "账户已创建", signupOkDesc: "请检查邮箱以验证您的账户", forgotPassword: "忘记密码？", resetDesc: "输入您的邮箱，我们将发送密码重置链接。", resetSubmit: "发送重置链接", resetSent: "邮件已发送！", resetSentDesc: "请检查邮箱获取密码重置链接。" },
 };
 
 const tr: Dict = {
@@ -147,7 +147,7 @@ const tr: Dict = {
     { title: "7/24 destek", desc: "Çok dilli destek ekibi gece gündüz hizmetinizde" },
   ]},
   footer: { title: "Bize ulaşın", subtitle: "Her zaman yardıma hazırız", whatsapp: "WhatsApp'tan yazın", email: "E-posta", rights: "© 2026 Sarraf. Tüm hakları saklıdır" },
-  auth: { loginTitle: "Giriş", signupTitle: "Hesap oluştur", loginSub: "Siparişlerinizi yönetmek için giriş yapın", signupSub: "Dakikalar içinde güvenle başlayın", fullName: "Ad soyad", fullNamePh: "Adınızı girin", email: "E-posta", password: "Şifre", submitLogin: "Giriş yap", submitSignup: "Hesap oluştur", toLogin: "Hesabınız var mı? Giriş yapın", toSignup: "Hesabınız yok mu? Kaydolun", loginErr: "Giriş hatası", signupErr: "Kayıt hatası", signupOk: "Hesap oluşturuldu", signupOkDesc: "Hesabınızı doğrulamak için e-postanızı kontrol edin" },
+  auth: { loginTitle: "Giriş", signupTitle: "Hesap oluştur", loginSub: "Siparişlerinizi yönetmek için giriş yapın", signupSub: "Dakikalar içinde güvenle başlayın", fullName: "Ad soyad", fullNamePh: "Adınızı girin", email: "E-posta", password: "Şifre", submitLogin: "Giriş yap", submitSignup: "Hesap oluştur", toLogin: "Hesabınız var mı? Giriş yapın", toSignup: "Hesabınız yok mu? Kaydolun", loginErr: "Giriş hatası", signupErr: "Kayıt hatası", signupOk: "Hesap oluşturuldu", signupOkDesc: "Hesabınızı doğrulamak için e-postanızı kontrol edin", forgotPassword: "Şifreni mi unuttun?", resetDesc: "E-postanızı girin, size şifre sıfırlama bağlantısı gönderelim.", resetSubmit: "Bağlantı gönder", resetSent: "E-posta gönderildi!", resetSentDesc: "Şifre sıfırlama bağlantısı için gelen kutunuzu kontrol edin." },
 };
 
 const fr: Dict = {
@@ -165,7 +165,7 @@ const fr: Dict = {
     { title: "Support 24/7", desc: "Équipe d'assistance multilingue disponible en continu" },
   ]},
   footer: { title: "Contactez-nous", subtitle: "Nous sommes là pour vous aider à tout moment", whatsapp: "Discuter sur WhatsApp", email: "E-mail", rights: "© 2026 Sarraf. Tous droits réservés" },
-  auth: { loginTitle: "Connexion", signupTitle: "Créer un compte", loginSub: "Connectez-vous pour gérer vos commandes", signupSub: "Commencez en toute sécurité en quelques minutes", fullName: "Nom complet", fullNamePh: "Votre nom", email: "E-mail", password: "Mot de passe", submitLogin: "Se connecter", submitSignup: "Créer le compte", toLogin: "Déjà un compte ? Se connecter", toSignup: "Pas de compte ? S'inscrire", loginErr: "Erreur de connexion", signupErr: "Erreur d'inscription", signupOk: "Compte créé", signupOkDesc: "Vérifiez votre e-mail pour activer votre compte" },
+  auth: { loginTitle: "Connexion", signupTitle: "Créer un compte", loginSub: "Connectez-vous pour gérer vos commandes", signupSub: "Commencez en toute sécurité en quelques minutes", fullName: "Nom complet", fullNamePh: "Votre nom", email: "E-mail", password: "Mot de passe", submitLogin: "Se connecter", submitSignup: "Créer le compte", toLogin: "Déjà un compte ? Se connecter", toSignup: "Pas de compte ? S'inscrire", loginErr: "Erreur de connexion", signupErr: "Erreur d'inscription", signupOk: "Compte créé", signupOkDesc: "Vérifiez votre e-mail pour activer votre compte", forgotPassword: "Mot de passe oublié ?", resetDesc: "Entrez votre e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.", resetSubmit: "Envoyer le lien", resetSent: "E-mail envoyé !", resetSentDesc: "Vérifiez votre boîte de réception pour le lien de réinitialisation." },
 };
 
 const es: Dict = {
@@ -183,7 +183,7 @@ const es: Dict = {
     { title: "Soporte 24/7", desc: "Equipo de soporte multilingüe a toda hora" },
   ]},
   footer: { title: "Contáctanos", subtitle: "Estamos para ayudarte en cualquier momento", whatsapp: "Chatear por WhatsApp", email: "Correo electrónico", rights: "© 2026 Sarraf. Todos los derechos reservados" },
-  auth: { loginTitle: "Iniciar sesión", signupTitle: "Crear cuenta", loginSub: "Accede para gestionar tus pedidos", signupSub: "Empieza a operar de forma segura en minutos", fullName: "Nombre completo", fullNamePh: "Tu nombre", email: "Correo", password: "Contraseña", submitLogin: "Entrar", submitSignup: "Crear cuenta", toLogin: "¿Ya tienes cuenta? Inicia sesión", toSignup: "¿Sin cuenta? Regístrate", loginErr: "Error al iniciar sesión", signupErr: "Error de registro", signupOk: "Cuenta creada", signupOkDesc: "Revisa tu correo para verificar la cuenta" },
+  auth: { loginTitle: "Iniciar sesión", signupTitle: "Crear cuenta", loginSub: "Accede para gestionar tus pedidos", signupSub: "Empieza a operar de forma segura en minutos", fullName: "Nombre completo", fullNamePh: "Tu nombre", email: "Correo", password: "Contraseña", submitLogin: "Entrar", submitSignup: "Crear cuenta", toLogin: "¿Ya tienes cuenta? Inicia sesión", toSignup: "¿Sin cuenta? Regístrate", loginErr: "Error al iniciar sesión", signupErr: "Error de registro", signupOk: "Cuenta creada", signupOkDesc: "Revisa tu correo para verificar la cuenta", forgotPassword: "¿Olvidaste tu contraseña?", resetDesc: "Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.", resetSubmit: "Enviar enlace", resetSent: "¡Correo enviado!", resetSentDesc: "Revisa tu bandeja para el enlace de restablecimiento." },
 };
 
 const hi: Dict = {
@@ -201,7 +201,7 @@ const hi: Dict = {
     { title: "24/7 सहायता", desc: "बहुभाषी सहायता टीम चौबीसों घंटे उपलब्ध" },
   ]},
   footer: { title: "संपर्क करें", subtitle: "हम हर समय मदद के लिए तैयार हैं", whatsapp: "WhatsApp पर चैट करें", email: "ईमेल", rights: "© 2026 Sarraf. सर्वाधिकार सुरक्षित" },
-  auth: { loginTitle: "साइन इन", signupTitle: "खाता बनाएँ", loginSub: "अपने ऑर्डर प्रबंधित करने के लिए साइन इन करें", signupSub: "मिनटों में सुरक्षित रूप से शुरू करें", fullName: "पूरा नाम", fullNamePh: "अपना नाम दर्ज करें", email: "ईमेल", password: "पासवर्ड", submitLogin: "साइन इन", submitSignup: "खाता बनाएँ", toLogin: "खाता है? साइन इन करें", toSignup: "खाता नहीं? अभी रजिस्टर करें", loginErr: "साइन इन त्रुटि", signupErr: "रजिस्टर त्रुटि", signupOk: "खाता बन गया", signupOkDesc: "अपने खाते को सत्यापित करने के लिए ईमेल देखें" },
+  auth: { loginTitle: "साइन इन", signupTitle: "खाता बनाएँ", loginSub: "अपने ऑर्डर प्रबंधित करने के लिए साइन इन करें", signupSub: "मिनटों में सुरक्षित रूप से शुरू करें", fullName: "पूरा नाम", fullNamePh: "अपना नाम दर्ज करें", email: "ईमेल", password: "पासवर्ड", submitLogin: "साइन इन", submitSignup: "खाता बनाएँ", toLogin: "खाता है? साइन इन करें", toSignup: "खाता नहीं? अभी रजिस्टर करें", loginErr: "साइन इन त्रुटि", signupErr: "रजिस्टर त्रुटि", signupOk: "खाता बन गया", signupOkDesc: "अपने खाते को सत्यापित करने के लिए ईमेल देखें", forgotPassword: "पासवर्ड भूल गए?", resetDesc: "अपना ईमेल दर्ज करें और हम आपको पासवर्ड रीसेट लिंक भेजेंगे।", resetSubmit: "लिंक भेजें", resetSent: "ईमेल भेज दिया!", resetSentDesc: "पासवर्ड रीसेट लिंक के लिए अपना इनबॉक्स देखें।" },
 };
 
 export const resources = {

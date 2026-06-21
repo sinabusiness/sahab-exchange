@@ -11,11 +11,13 @@ const Auth = () => {
   const { t } = useTranslation();
   const { user, loading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
+  const [isResetMode, setIsResetMode] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, resetPassword } = useAuth();
   const { toast } = useToast();
 
   if (loading) {
@@ -79,6 +81,50 @@ const Auth = () => {
         </div>
 
         <div className="bg-card border border-border rounded-2xl p-6 sm:p-8 gold-glow">
+          {isResetMode ? (
+            resetSent ? (
+              <div className="text-center py-4">
+                <Mail className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h2 className="text-lg font-bold text-foreground mb-2">{t("auth.resetSent")}</h2>
+                <p className="text-muted-foreground text-sm mb-6">{t("auth.resetSentDesc")}</p>
+                <button onClick={() => { setIsResetMode(false); setResetSent(false); }} className="text-primary hover:underline text-sm">
+                  {t("auth.toLogin")}
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                setSubmitting(true);
+                const { error } = await resetPassword(email);
+                if (error) {
+                  toast({ title: t("auth.loginErr"), description: error.message, variant: "destructive" });
+                } else {
+                  setResetSent(true);
+                }
+                setSubmitting(false);
+              }} className="space-y-5">
+                <p className="text-muted-foreground text-sm">{t("auth.resetDesc")}</p>
+                <div>
+                  <label htmlFor="reset-email" className="text-sm text-muted-foreground mb-1.5 block">{t("auth.email")}</label>
+                  <div className="relative">
+                    <Mail className="absolute start-3 top-3.5 w-4 h-4 text-muted-foreground" />
+                    <input id="reset-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@email.com" required dir="ltr"
+                      className="w-full bg-secondary border border-border rounded-lg px-4 py-3 ps-10 text-foreground focus:outline-none focus:ring-2 focus:ring-primary" />
+                  </div>
+                </div>
+                <button type="submit" disabled={submitting}
+                  className="w-full gold-gradient text-primary-foreground py-3 rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2">
+                  {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {t("auth.resetSubmit")}
+                </button>
+                <div className="text-center">
+                  <button type="button" onClick={() => setIsResetMode(false)} className="text-primary hover:underline text-sm">
+                    {t("auth.toLogin")}
+                  </button>
+                </div>
+              </form>
+            )
+          ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             {!isLogin && (
               <div>
@@ -131,6 +177,11 @@ const Auth = () => {
                   className="w-full bg-secondary border border-border rounded-lg px-4 py-3 ps-10 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
+              {isLogin && (
+                <button type="button" onClick={() => setIsResetMode(true)} className="text-primary hover:underline text-xs mt-1.5">
+                  {t("auth.forgotPassword")}
+                </button>
+              )}
             </div>
 
             <button
@@ -142,12 +193,15 @@ const Auth = () => {
               {isLogin ? t("auth.submitLogin") : t("auth.submitSignup")}
             </button>
           </form>
+          )}
 
+          {!isResetMode && (
           <div className="mt-6 text-center">
             <button onClick={() => setIsLogin(!isLogin)} className="text-primary hover:underline text-sm">
               {isLogin ? t("auth.toSignup") : t("auth.toLogin")}
             </button>
           </div>
+          )}
         </div>
       </div>
     </div>

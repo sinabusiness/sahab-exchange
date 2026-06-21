@@ -8,6 +8,7 @@ interface AuthContextType {
   loading: boolean;
   signUp: (email: string, password: string, fullName: string) => Promise<{ error: any; needsEmailConfirmation?: boolean }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
+  resetPassword: (email: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
 
@@ -34,19 +35,43 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+  const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+
+  const callEdgeFunction = async (functionName: string, body: Record<string, string>) => {
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/${functionName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Request failed");
+    return data;
+  };
+
   const signUp = async (email: string, password: string, fullName: string) => {
-    const redirectUrl = `${window.location.origin}/auth`;
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: redirectUrl,
+        emailRedirectTo: `${window.location.origin}/auth`,
         data: { full_name: fullName },
       },
     });
 
-    const needsEmailConfirmation = Boolean(data.user && !data.session);
+    if (!error && data.user && !data.session) {
+      try {
+        await callEdgeFunction("send-confirmation-email", { email });
+      } catch (e) {
+        console.error("Failed to send confirmation email:", e);
+      }
+    }
 
+    const needsEmailConfirmation = Boolean(data.user && !data.session);
     return { error, needsEmailConfirmation };
   };
 
@@ -55,12 +80,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return { error };
   };
 
+  const resetPassword = async (email: string) => {
+    try {
+      await callEdgeFunction("send-reset-email", { email });
+      return { error: null };
+    } catch (e: any) {
+      return { error: { message: e.message } };
+    }
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, resetPassword, signOut }}>
       {children}
     </AuthContext.Provider>
   );
