@@ -18,7 +18,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
+    <nav className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50" style={{ WebkitTransform: "translateZ(0)", transform: "translateZ(0)" }}>
       <div className="container max-w-6xl mx-auto flex items-center justify-between px-4 py-3 gap-2">
         <Link to="/" className="text-xl sm:text-2xl font-black gold-text shrink-0">{t("brand")}</Link>
 
