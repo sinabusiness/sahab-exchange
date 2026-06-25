@@ -47,7 +47,7 @@ export default function Trade() {
   const [orderType, setOrderType] = useState<'limit' | 'market'>('limit');
   const [search, setSearch] = useState('');
   const [marketTab, setMarketTab] = useState<'orderbook' | 'trades'>('orderbook');
-  const [timeframe, setTimeframe] = useState('1hour');
+  const [timeframe, setTimeframe] = useState('1h');
   const [asks, setAsks] = useState<OrderBookEntry[]>([]);
   const [bids, setBids] = useState<OrderBookEntry[]>([]);
   const [recentTrades, setRecentTrades] = useState<TradeEntry[]>([]);
@@ -112,7 +112,7 @@ export default function Trade() {
         // LBank returns { asks: [[price, amount], ...], bids: [...] }
         const asksArr = data.asks || data?.data?.asks || [];
         const bidsArr = data.bids || data?.data?.bids || [];
-        setAsks(asksArr.map((a: any) => ({ price: parseFloat(a[0]), amount: parseFloat(a[1]) })).reverse());
+        setAsks(asksArr.map((a: any) => ({ price: parseFloat(a[0]), amount: parseFloat(a[1]) })));
         setBids(bidsArr.map((b: any) => ({ price: parseFloat(b[0]), amount: parseFloat(b[1]) })));
       })
       .catch(() => {});
@@ -241,7 +241,7 @@ export default function Trade() {
                     <span className="w-24 text-right">{t('trade.total')}</span>
                   </div>
                   <div className="flex-1 overflow-y-auto flex flex-col justify-end">
-                    {asks.slice(0, 10).map((a, i) => {
+                    {asks.slice(-10).reverse().map((a, i) => {
                       const total = a.price * a.amount;
                       const pct = (a.amount / maxAskAmount) * 100;
                       return (

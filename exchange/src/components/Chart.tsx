@@ -9,8 +9,8 @@ interface Props {
 }
 
 const intervalMap: Record<string, string> = {
-  '1m': '1min', '5m': '5min', '15m': '15min', '30m': '30min',
-  '1h': '1hour', '4h': '4hour', '1d': '1day', '1w': '1week',
+  '1m': 'minute1', '5m': 'minute5', '15m': 'minute15', '30m': 'minute30',
+  '1h': 'hour1', '4h': 'hour4', '1d': 'day1', '1w': 'week1',
 };
 
 export default function Chart({ symbol, basePrice, timeframe }: Props) {
