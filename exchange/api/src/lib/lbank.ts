@@ -85,11 +85,11 @@ export class LBankClient {
     if (price) params.price = price;
     if (amount) params.amount = amount;
 
-    return this.signedRequest('POST', '/v2/supplement/submit_trade', params);
+    return this.signedRequest('POST', '/v2/supplement/submit_trade.do', params);
   }
 
   async cancelOrder(symbol: string, orderId: string): Promise<any> {
-    return this.signedRequest('POST', '/v2/supplement/cancel_trade', { symbol, order_id: orderId });
+    return this.signedRequest('POST', '/v2/supplement/cancel_order.do', { symbol, order_id: orderId });
   }
 
   async getOpenOrders(symbol?: string, currentPage = 1, pageSize = 50): Promise<any> {
@@ -98,7 +98,7 @@ export class LBankClient {
       pageSize: pageSize.toString(),
     };
     if (symbol) params.symbol = symbol;
-    return this.signedRequest('POST', '/v2/supplement/open_orders', params);
+    return this.signedRequest('POST', '/v2/supplement/open_orders.do', params);
   }
 
   async getOrderHistory(symbol?: string, currentPage = 1, pageSize = 50): Promise<any> {
@@ -107,13 +107,13 @@ export class LBankClient {
       pageSize: pageSize.toString(),
     };
     if (symbol) params.symbol = symbol;
-    return this.signedRequest('POST', '/v2/supplement/history_orders', params);
+    return this.signedRequest('POST', '/v2/supplement/history_orders.do', params);
   }
 
   async getBalance(currency?: string): Promise<any> {
     const params: Record<string, string> = {};
     if (currency) params.asset = currency;
-    return this.signedRequest('POST', '/v2/supplement/user_info', params);
+    return this.signedRequest('POST', '/v2/supplement/user_info.do', params);
   }
 
   async withdraw(currency: string, amount: string, address: string, network?: string): Promise<any> {
@@ -123,10 +123,12 @@ export class LBankClient {
       toAddress: address,
     };
     if (network) params.chain = network;
-    return this.signedRequest('POST', '/v2/withdraw/submit', params);
+    return this.signedRequest('POST', '/v2/withdraw/submit.do', params);
   }
 
-  async getDepositAddress(currency: string): Promise<any> {
-    return this.signedRequest('POST', '/v2/supplement/getDepositAddress', { asset: currency });
+  async getDepositAddress(currency: string, networkName?: string): Promise<any> {
+    const params: Record<string, string> = { coin: currency };
+    if (networkName) params.networkName = networkName;
+    return this.signedRequest('POST', '/v2/supplement/get_deposit_address.do', params);
   }
 }

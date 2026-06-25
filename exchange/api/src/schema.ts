@@ -70,4 +70,14 @@ CREATE TABLE IF NOT EXISTS withdrawals (
   created_at TEXT DEFAULT (datetime('now')),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+CREATE TABLE IF NOT EXISTS deposit_addresses (
+  user_id INTEGER NOT NULL,
+  currency TEXT NOT NULL,
+  address TEXT NOT NULL,
+  tag TEXT DEFAULT '',
+  created_at TEXT DEFAULT (datetime('now')),
+  PRIMARY KEY (user_id, currency),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
 `;

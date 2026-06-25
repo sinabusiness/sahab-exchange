@@ -66,7 +66,7 @@ export default function Navbar() {
                       <button
                         key={l.code}
                         onClick={() => { setLang(l.code); setLangOpen(false); }}
-                        className={`w-full text-left px-3.5 py-2 text-[13px] transition-colors ${
+                        className={`w-full text-start px-3.5 py-2 text-[13px] transition-colors ${
                           lang.code === l.code ? 'text-[#00d4aa] bg-[#00d4aa]/[0.08]' : 'text-[#8892a4] hover:text-white hover:bg-[#1a1f2e]/50'
                         }`}
                       >
@@ -143,7 +143,7 @@ export default function Navbar() {
               <>
                 <Link to="/dashboard" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg text-[14px] font-medium text-[#8892a4] hover:text-white hover:bg-[#1a1f2e]/30">داشبورد</Link>
                 <Link to="/wallet" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg text-[14px] font-medium text-[#8892a4] hover:text-white hover:bg-[#1a1f2e]/30">کیف پول</Link>
-                <button onClick={() => { logout(); setMobileOpen(false); }} className="block w-full text-left px-4 py-2.5 rounded-lg text-[14px] font-medium text-[#ef4444] hover:bg-[#1a1f2e]/30">خروج</button>
+                <button onClick={() => { logout(); setMobileOpen(false); }} className="block w-full text-start px-4 py-2.5 rounded-lg text-[14px] font-medium text-[#ef4444] hover:bg-[#1a1f2e]/30">خروج</button>
               </>
             ) : (
               <Link to="/login" onClick={() => setMobileOpen(false)} className="block text-center px-5 py-2.5 border border-[#1a1f2e] text-[#8892a4] text-[14px] font-semibold rounded-lg">ورود</Link>

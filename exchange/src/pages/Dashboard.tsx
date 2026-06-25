@@ -81,7 +81,7 @@ export default function Dashboard() {
                       <div className="w-8 h-8 rounded-full bg-[#1a1f2e] flex items-center justify-center text-xs font-bold text-white">{w.currency.slice(0, 2)}</div>
                       <span className="text-white font-medium">{w.currency}</span>
                     </div>
-                    <div className="text-left" dir="ltr">
+                    <div className="text-start" dir="ltr">
                       <div className="text-white font-semibold">{w.balance.toFixed(4)}</div>
                       {w.locked_balance > 0 && <div className="text-[#5a6478] text-xs">قفل شده: {w.locked_balance.toFixed(4)}</div>}
                     </div>
@@ -111,7 +111,7 @@ export default function Dashboard() {
                         </span>
                       </div>
                     </div>
-                    <div className="text-left" dir="ltr">
+                    <div className="text-start" dir="ltr">
                       <div className="text-white text-sm">{o.amount}</div>
                       <div className="text-[#5a6478] text-xs">${o.price}</div>
                     </div>

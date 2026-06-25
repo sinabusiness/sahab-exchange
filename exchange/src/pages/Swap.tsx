@@ -163,7 +163,7 @@ export default function Swap() {
                   </div>
                   <div className="flex items-center gap-3 bg-[#0c1017] border border-[#1a1f2e] rounded-lg p-3 focus-within:border-[#00d4aa]/40 transition-colors">
                     <CoinDropdown selected={fromCoin} onSelect={setFromCoin} open={fromOpen} onToggle={() => { setFromOpen(!fromOpen); setToOpen(false); }} />
-                    <input type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="0.00" className="flex-1 bg-transparent text-[20px] font-semibold text-white text-left focus:outline-none placeholder-[#2a3040]" dir="ltr" />
+                    <input type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="0.00" className="flex-1 bg-transparent text-[20px] font-semibold text-white text-start focus:outline-none placeholder-[#2a3040]" dir="ltr" />
                     <button className="px-2.5 py-1 bg-[#1a1f2e] rounded text-[11px] text-[#8892a4] hover:text-white transition-colors">{t('swap.max')}</button>
                   </div>
                 </div>
@@ -183,7 +183,7 @@ export default function Swap() {
                   </div>
                   <div className="flex items-center gap-3 bg-[#0c1017] border border-[#1a1f2e] rounded-lg p-3">
                     <CoinDropdown selected={toCoin} onSelect={setToCoin} open={toOpen} onToggle={() => { setToOpen(!toOpen); setFromOpen(false); }} />
-                    <div className="flex-1 text-[20px] font-semibold text-white text-left" dir="ltr">{receive}</div>
+                    <div className="flex-1 text-[20px] font-semibold text-white text-start" dir="ltr">{receive}</div>
                   </div>
                 </div>
 
@@ -262,7 +262,7 @@ export default function Swap() {
                       if (fromSwap) setFromCoin(fromSwap);
                       if (toSwap) setToCoin(toSwap);
                     }
-                  }} className="w-full flex items-center justify-between px-5 py-2.5 border-b border-[#1a1f2e] last:border-0 hover:bg-[#1a1f2e]/50 transition-colors text-left">
+                  }} className="w-full flex items-center justify-between px-5 py-2.5 border-b border-[#1a1f2e] last:border-0 hover:bg-[#1a1f2e]/50 transition-colors text-start">
                     <div className="flex items-center gap-2">
                       <span className="text-sm">{fromInfo?.icon}</span>
                       <span className="text-white text-[13px] font-medium" dir="ltr">{p.from}/{p.to}</span>

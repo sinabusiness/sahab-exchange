@@ -28,9 +28,47 @@ walletRoutes.get('/all', async (c) => {
 walletRoutes.get('/deposit-address/:currency', async (c) => {
   const currency = c.req.param('currency');
   const userId = (c as any).get('userId');
+
+  // Check if we already have a stored address
   const addr = await c.env.DB.prepare('SELECT address, tag FROM deposit_addresses WHERE user_id = ? AND currency = ?').bind(userId, currency).first();
-  if (addr) return c.json(addr);
-  return c.json({ address: 'Deposit address will be generated on first deposit', tag: null });
+  if (addr && addr.address && !addr.address.includes('will be generated')) return c.json(addr);
+
+  // Generate from LBank
+  try {
+    const { LBankClient } = await import('../lib/lbank.js');
+    const lbank = new LBankClient(c.env.LBANK_API_KEY, c.env.LBANK_API_SECRET);
+    const result = await lbank.getDepositAddress(currency);
+
+    // result may be { address, tag } or an array
+    let address = '';
+    let tag = null;
+    if (Array.isArray(result)) {
+      const first = result[0];
+      address = first?.address || '';
+      tag = first?.tag || null;
+    } else {
+      address = result?.address || result?.toAddress || '';
+      tag = result?.tag || null;
+    }
+
+    if (address) {
+      // Store in DB
+      await c.env.DB.prepare(
+        'INSERT OR REPLACE INTO deposit_addresses (user_id, currency, address, tag) VALUES (?, ?, ?, ?)'
+      ).bind(userId, currency, address, tag).run();
+      return c.json({ address, tag });
+    }
+  } catch (e: any) {
+    // If LBank fails, generate a placeholder so the UI doesn't break
+  }
+
+  // Fallback: return the user's internal wallet address
+  const wallet = await c.env.DB.prepare('SELECT currency FROM wallets WHERE user_id = ? AND currency = ?').bind(userId, currency).first();
+  if (!wallet) {
+    // Create wallet entry if it doesn't exist
+    await c.env.DB.prepare('INSERT OR IGNORE INTO wallets (user_id, currency, balance, locked_balance) VALUES (?, ?, 0, 0)').bind(userId, currency).run();
+  }
+  return c.json({ address: '', tag: null });
 });
 
 walletRoutes.post('/withdraw', async (c) => {

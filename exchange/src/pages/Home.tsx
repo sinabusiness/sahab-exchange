@@ -180,12 +180,14 @@ export default function Home() {
             topCoins.map(coin => {
               const info = getCoinInfo(coin.symbol);
               return (
-                <button key={coin.symbol} onClick={() => goToTrade(coin.symbol)} className="glass glass-hover rounded-xl p-4 cursor-pointer coin-icon text-left w-full">
-                  <div className="flex items-center gap-2.5 mb-3">
-                    <span className="text-xl w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${info.color}15` }}>{info.icon}</span>
-                    <div>
-                      <div className="text-white text-sm font-semibold">{coin.symbol}</div>
-                      <div className="text-[#5a6478] text-[11px]">{info.name}</div>
+                <button key={coin.symbol} onClick={() => goToTrade(coin.symbol)} className="glass glass-hover rounded-xl p-4 cursor-pointer coin-icon w-full">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-xl w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: `${info.color}15` }}>{info.icon}</span>
+                      <div>
+                        <div className="text-white text-sm font-semibold">{coin.symbol}</div>
+                        <div className="text-[#5a6478] text-[11px]">{info.name}</div>
+                      </div>
                     </div>
                   </div>
                   <div className="text-white font-semibold text-[15px]" dir="ltr">${formatPrice(coin.price)}</div>
@@ -220,7 +222,7 @@ export default function Home() {
             {gainers.map((coin, i) => {
               const info = getCoinInfo(coin.symbol);
               return (
-                <button key={i} onClick={() => goToTrade(coin.symbol)} className="w-full flex items-center justify-between px-5 py-2.5 border-b border-[#1a1f2e]/30 last:border-0 table-row-hover transition-colors text-left">
+                <button key={i} onClick={() => goToTrade(coin.symbol)} className="w-full flex items-center justify-between px-5 py-2.5 border-b border-[#1a1f2e]/30 last:border-0 table-row-hover transition-colors text-start">
                   <div className="flex items-center gap-2.5">
                     <span className="text-sm">{info.icon}</span>
                     <div>
@@ -248,7 +250,7 @@ export default function Home() {
             {losers.map((coin, i) => {
               const info = getCoinInfo(coin.symbol);
               return (
-                <button key={i} onClick={() => goToTrade(coin.symbol)} className="w-full flex items-center justify-between px-5 py-2.5 border-b border-[#1a1f2e]/30 last:border-0 table-row-hover transition-colors text-left">
+                <button key={i} onClick={() => goToTrade(coin.symbol)} className="w-full flex items-center justify-between px-5 py-2.5 border-b border-[#1a1f2e]/30 last:border-0 table-row-hover transition-colors text-start">
                   <div className="flex items-center gap-2.5">
                     <span className="text-sm">{info.icon}</span>
                     <div>
@@ -276,7 +278,7 @@ export default function Home() {
             {mostTraded.map((coin, i) => {
               const info = getCoinInfo(coin.symbol);
               return (
-                <button key={i} onClick={() => goToTrade(coin.symbol)} className="w-full flex items-center justify-between px-5 py-2.5 border-b border-[#1a1f2e]/30 last:border-0 table-row-hover transition-colors text-left">
+                <button key={i} onClick={() => goToTrade(coin.symbol)} className="w-full flex items-center justify-between px-5 py-2.5 border-b border-[#1a1f2e]/30 last:border-0 table-row-hover transition-colors text-start">
                   <div className="flex items-center gap-2.5">
                     <span className="text-sm">{info.icon}</span>
                     <span className="text-white text-[13px] font-medium" dir="ltr">{coin.symbol}/USDT</span>

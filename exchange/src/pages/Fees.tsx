@@ -37,7 +37,7 @@ function FaqItem({ qKey, aKey }: { qKey: string; aKey: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="glass glass-hover rounded-xl overflow-hidden">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-5 py-4 text-left">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-5 py-4 text-start">
         <span className="text-white font-medium text-[14px]">{t(qKey)}</span>
         {open ? <ChevronUp className="w-4 h-4 text-[#5a6478] shrink-0" /> : <ChevronDown className="w-4 h-4 text-[#5a6478] shrink-0" />}
       </button>
@@ -71,10 +71,10 @@ export default function Fees() {
               <table className="w-full text-[13px]">
                 <thead>
                   <tr className="border-b border-[#1a1f2e]">
-                    <th className="text-left px-5 py-3 text-[#5a6478] font-medium">{t('fees.tier')}</th>
-                    <th className="text-left px-5 py-3 text-[#5a6478] font-medium">{t('fees.monthlyVolume')}</th>
-                    <th className="text-left px-5 py-3 text-[#5a6478] font-medium">{t('fees.makerFee')}</th>
-                    <th className="text-left px-5 py-3 text-[#5a6478] font-medium">{t('fees.takerFee')}</th>
+                    <th className="text-start px-5 py-3 text-[#5a6478] font-medium">{t('fees.tier')}</th>
+                    <th className="text-start px-5 py-3 text-[#5a6478] font-medium">{t('fees.monthlyVolume')}</th>
+                    <th className="text-start px-5 py-3 text-[#5a6478] font-medium">{t('fees.makerFee')}</th>
+                    <th className="text-start px-5 py-3 text-[#5a6478] font-medium">{t('fees.takerFee')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -101,10 +101,10 @@ export default function Fees() {
               <table className="w-full text-[13px]">
                 <thead>
                   <tr className="border-b border-[#1a1f2e]">
-                    <th className="text-left px-5 py-3 text-[#5a6478] font-medium">{t('fees.coin')}</th>
-                    <th className="text-left px-5 py-3 text-[#5a6478] font-medium">{t('fees.network')}</th>
-                    <th className="text-left px-5 py-3 text-[#5a6478] font-medium">{t('fees.fee')}</th>
-                    <th className="text-left px-5 py-3 text-[#5a6478] font-medium">{t('fees.approxUsd')}</th>
+                    <th className="text-start px-5 py-3 text-[#5a6478] font-medium">{t('fees.coin')}</th>
+                    <th className="text-start px-5 py-3 text-[#5a6478] font-medium">{t('fees.network')}</th>
+                    <th className="text-start px-5 py-3 text-[#5a6478] font-medium">{t('fees.fee')}</th>
+                    <th className="text-start px-5 py-3 text-[#5a6478] font-medium">{t('fees.approxUsd')}</th>
                   </tr>
                 </thead>
                 <tbody>
