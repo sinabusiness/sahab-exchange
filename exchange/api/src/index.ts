@@ -12,46 +12,110 @@ app.use('*', cors({ origin: '*', allowHeaders: ['Content-Type', 'Authorization']
 
 app.get('/', (c) => c.json({ status: 'ok', name: 'Sarraf Exchange API', exchange: 'LBank' }));
 
-// Public market data (LBank)
+const LBANK = 'https://api.lbkex.com';
+
+const lbkFetch = async (url: string) => {
+  const resp = await fetch(url);
+  const text = await resp.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { error: 'non-JSON', raw: text.substring(0, 200) };
+  }
+};
+
 app.get('/api/market/tickers', async (c) => {
-  const resp = await fetch('https://api.lbank.info/v2/spot/tickers');
-  const data = await resp.json();
-  return c.json(data.data || []);
+  try {
+    const topSymbols = [
+      'btc_usdt','eth_usdt','sol_usdt','bnb_usdt','xrp_usdt','ada_usdt',
+      'doge_usdt','avax_usdt','dot_usdt','link_usdt','matic_usdt','uni_usdt',
+      'atom_usdt','ltc_usdt','fil_usdt','near_usdt','apt_usdt','arb_usdt',
+      'op_usdt','sui_usdt','pepe_usdt','shib_usdt','xlm_usdt','trx_usdt',
+      'ton_usdt','etc_usdt','wif_usdt','floki_usdt','cro_usdt','algo_usdt',
+      'sei_usdt','inj_usdt','tia_usdt','render_usdt','fet_usdt','grt_usdt',
+      'aave_usdt','mkr_usdt','crv_usdt','sand_usdt','mana_usdt','axs_usdt',
+      'eos_usdt','xtz_usdt','hbar_usdt','icp_usdt','vet_usdt','theta_usdt',
+      'comp_usdt','yfi_usdt','sushi_usdt','ftm_usdt','zil_usdt','enj_usdt',
+      'chz_usdt','ldo_usdt','flow_usdt','egld_usdt','kava_usdt','ksm_usdt',
+      'zec_usdt','dash_usdt','neo_usdt','qtum_usdt','iota_usdt','xmr_usdt',
+      'bch_usdt','stx_usdt','imx_usdt','blur_usdt','jup_usdt','pyth_usdt',
+      'wld_usdt','ordi_usdt','bonk_usdt','strk_usdt','ondo_usdt','not_usdt',
+      'jto_usdt','w_usdt','tao_usdt','virtual_usdt','fartcoin_usdt',
+      'popcat_usdt','bome_usdt','ens_usdt','pendle_usdt','kas_usdt','pol_usdt',
+    ];
+    const unique = [...new Set(topSymbols)];
+    const results = await Promise.allSettled(
+      unique.map(sym =>
+        lbkFetch(`${LBANK}/v2/ticker/24hr.do?symbol=${sym}`)
+          .then(d => d.data?.[0])
+          .catch(() => null)
+      )
+    );
+    const tickers = results
+      .filter((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled' && r.value?.symbol)
+      .map(r => r.value);
+    return c.json(tickers);
+  } catch (e: any) {
+    return c.json({ error: e.message }, 500);
+  }
 });
 
 app.get('/api/market/ticker/:pair', async (c) => {
-  const pair = c.req.param('pair');
-  const resp = await fetch(`https://api.lbank.info/v2/spot/ticker?symbol=${pair}`);
-  const data = await resp.json();
-  return c.json(data.data?.[0] || {});
+  try {
+    const pair = c.req.param('pair');
+    const data = await lbkFetch(`${LBANK}/v2/ticker/24hr.do?symbol=${pair}`);
+    if (data.error) return c.json({ error: data.raw || data.error }, 502);
+    return c.json(data.data?.[0] || {});
+  } catch (e: any) {
+    return c.json({ error: e.message }, 500);
+  }
 });
 
 app.get('/api/market/orderbook/:pair', async (c) => {
-  const pair = c.req.param('pair');
-  const limit = c.req.query('limit') || '20';
-  const resp = await fetch(`https://api.lbank.info/v2/spot/depth?symbol=${pair}&limit=${limit}`);
-  const data = await resp.json();
-  return c.json(data.data || {});
+  try {
+    const pair = c.req.param('pair');
+    const limit = c.req.query('limit') || '20';
+    const data = await lbkFetch(`${LBANK}/v2/depth.do?symbol=${pair}&size=${limit}`);
+    if (data.error) return c.json({ error: data.raw || data.error }, 502);
+    return c.json(data.data || {});
+  } catch (e: any) {
+    return c.json({ error: e.message }, 500);
+  }
 });
 
 app.get('/api/market/candles/:pair', async (c) => {
-  const pair = c.req.param('pair');
-  const interval = c.req.query('interval') || '1h';
-  const resp = await fetch(`https://api.lbank.info/v2/spot/kline?symbol=${pair}&type=${interval}&size=200`);
-  const data = await resp.json();
-  return c.json(data.data || []);
+  try {
+    const pair = c.req.param('pair');
+    const interval = c.req.query('interval') || 'hour1';
+    const size = 200;
+    const intervalMs: Record<string, number> = {
+      'minute1': 60000, 'minute5': 300000, 'minute15': 900000, 'minute30': 1800000,
+      'hour1': 3600000, 'hour4': 14400000, 'hour8': 28800000, 'hour12': 43200000,
+      'day1': 86400000, 'week1': 604800000, 'month1': 2592000000,
+    };
+    const startTime = Math.floor((Date.now() - (intervalMs[interval] || 3600000) * size) / 1000);
+    const url = `${LBANK}/v2/kline.do?symbol=${pair}&type=${interval}&size=${size}&time=${startTime}`;
+    const data = await lbkFetch(url);
+    if (data.error) return c.json({ error: data.raw || data.error }, 502);
+    return c.json(data.data || []);
+  } catch (e: any) {
+    return c.json({ error: e.message }, 500);
+  }
 });
 
 app.get('/api/market/trades/:pair', async (c) => {
-  const pair = c.req.param('pair');
-  const resp = await fetch(`https://api.lbank.info/v2/spot/trades?symbol=${pair}&size=60`);
-  const data = await resp.json();
-  return c.json(data.data || []);
+  try {
+    const pair = c.req.param('pair');
+    const data = await lbkFetch(`${LBANK}/v2/trades.do?symbol=${pair}&size=60`);
+    if (data.error) return c.json({ error: data.raw || data.error }, 502);
+    return c.json(data.data || []);
+  } catch (e: any) {
+    return c.json({ error: e.message }, 500);
+  }
 });
 
 app.get('/api/market/exchange-info', async (c) => {
-  const resp = await fetch('https://api.lbank.info/v2/spot/symbols');
-  const data = await resp.json();
+  const data = await lbkFetch(`${LBANK}/v2/currencyPairs.do`);
   return c.json(data.data || []);
 });
 

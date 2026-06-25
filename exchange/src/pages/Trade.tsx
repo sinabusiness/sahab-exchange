@@ -63,7 +63,7 @@ export default function Trade() {
           .map((d: any) => {
             const sym = (d.symbol || '').replace('_usdt', '').replace('USDT', '').toUpperCase();
             const ticker = d.ticker || d;
-            const price = parseFloat(ticker.last || '0');
+            const price = parseFloat(ticker.latest || ticker.last || '0');
             const change = parseFloat(ticker.change || '0');
             const turnover = parseFloat(ticker.turnover || ticker.quoteVolume || '0');
             const coin = buildCoinFromSymbol(sym + '_usdt');

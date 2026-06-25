@@ -52,7 +52,7 @@ export default function Home() {
             const ticker = d.ticker || d;
             return {
               symbol: sym,
-              price: parseFloat(ticker.last || '0'),
+              price: parseFloat(ticker.latest || ticker.last || '0'),
               change: parseFloat(ticker.change || '0'),
               volume: formatVol(parseFloat(ticker.turnover || '0')),
               quoteVolume: parseFloat(ticker.turnover || '0'),

@@ -41,7 +41,7 @@ export default function Swap() {
               symbol: coin.symbol,
               name: coin.name,
               icon: coin.icon,
-              price: parseFloat(ticker.last || '0'),
+              price: parseFloat(ticker.latest || ticker.last || '0'),
             };
           })
           .filter((c: SwapCoin) => c.price > 0);

@@ -3,7 +3,7 @@ import { hmacSha256 } from './hmac';
 export class LBankClient {
   private key: string;
   private secret: string;
-  private baseUrl = 'https://api.lbank.info';
+  private baseUrl = 'https://api.lbkex.com';
 
   constructor(key: string, secret: string) {
     this.key = key;
@@ -13,7 +13,6 @@ export class LBankClient {
   private async signedRequest(method: string, path: string, params: Record<string, string> = {}): Promise<any> {
     params.timestamp = Date.now().toString();
 
-    // LBank v2 signing: sort params alphabetically, concat as query string, HMAC SHA256
     const sortedKeys = Object.keys(params).sort();
     const signParts = sortedKeys.map(k => `${k}=${params[k]}`);
     const signStr = signParts.join('&');
@@ -36,62 +35,61 @@ export class LBankClient {
 
     const resp = await fetch(url, { method, headers, body });
     const data = await resp.json();
-    if (data.code !== '0') throw new Error(`LBank: ${data.msg || JSON.stringify(data)}`);
+    if (data.error_code !== 0) throw new Error(`LBank: ${data.msg || JSON.stringify(data)}`);
     return data.data;
   }
 
-  // Public endpoints (no auth)
   async getTickerAll(): Promise<any[]> {
-    const resp = await fetch(`${this.baseUrl}/v2/spot/tickers`);
+    const resp = await fetch(`${this.baseUrl}/v2/ticker/24hr.do?symbol=all`);
     const data = await resp.json();
     return data.data || [];
   }
 
   async getTicker(symbol: string): Promise<any> {
-    const resp = await fetch(`${this.baseUrl}/v2/spot/ticker?symbol=${symbol}`);
+    const resp = await fetch(`${this.baseUrl}/v2/ticker/24hr.do?symbol=${symbol}`);
     const data = await resp.json();
     return data.data?.[0] || {};
   }
 
   async getOrderBook(symbol: string, limit = 20): Promise<any> {
-    const resp = await fetch(`${this.baseUrl}/v2/spot/depth?symbol=${symbol}&limit=${limit}`);
+    const resp = await fetch(`${this.baseUrl}/v2/depth.do?symbol=${symbol}&size=${limit}`);
     const data = await resp.json();
     return data.data || {};
   }
 
   async getCandles(symbol: string, type: string, size = 200): Promise<any[]> {
-    const resp = await fetch(`${this.baseUrl}/v2/spot/kline?symbol=${symbol}&type=${type}&size=${size}`);
+    const time = Math.floor(Date.now() / 1000).toString();
+    const resp = await fetch(`${this.baseUrl}/v2/kline.do?symbol=${symbol}&type=${type}&size=${size}&time=${time}`);
     const data = await resp.json();
     return data.data || [];
   }
 
   async getRecentTrades(symbol: string, limit = 60): Promise<any[]> {
-    const resp = await fetch(`${this.baseUrl}/v2/spot/trades?symbol=${symbol}&size=${limit}`);
+    const resp = await fetch(`${this.baseUrl}/v2/trades.do?symbol=${symbol}&size=${limit}`);
     const data = await resp.json();
     return data.data || [];
   }
 
   async getExchangeInfo(): Promise<any> {
-    const resp = await fetch(`${this.baseUrl}/v2/spot/symbols`);
+    const resp = await fetch(`${this.baseUrl}/v2/currencyPairs.do`);
     const data = await resp.json();
     return data.data || [];
   }
 
-  // Signed endpoints
   async createOrder(symbol: string, side: string, type: string, price?: string, amount?: string): Promise<any> {
     const params: Record<string, string> = {
       symbol,
-      side: side.toLowerCase(), // buy or sell
-      type: type.toLowerCase(), // limit or market
+      side: side.toLowerCase(),
+      type: type.toLowerCase(),
     };
     if (price) params.price = price;
     if (amount) params.amount = amount;
 
-    return this.signedRequest('POST', '/v2/spot/submit_order', params);
+    return this.signedRequest('POST', '/v2/supplement/submit_trade', params);
   }
 
   async cancelOrder(symbol: string, orderId: string): Promise<any> {
-    return this.signedRequest('POST', '/v2/spot/cancel_order', { symbol, orderId });
+    return this.signedRequest('POST', '/v2/supplement/cancel_trade', { symbol, order_id: orderId });
   }
 
   async getOpenOrders(symbol?: string, currentPage = 1, pageSize = 50): Promise<any> {
@@ -100,7 +98,7 @@ export class LBankClient {
       pageSize: pageSize.toString(),
     };
     if (symbol) params.symbol = symbol;
-    return this.signedRequest('POST', '/v2/spot/open_orders', params);
+    return this.signedRequest('POST', '/v2/supplement/open_orders', params);
   }
 
   async getOrderHistory(symbol?: string, currentPage = 1, pageSize = 50): Promise<any> {
@@ -109,13 +107,13 @@ export class LBankClient {
       pageSize: pageSize.toString(),
     };
     if (symbol) params.symbol = symbol;
-    return this.signedRequest('POST', '/v2/spot/history_orders', params);
+    return this.signedRequest('POST', '/v2/supplement/history_orders', params);
   }
 
   async getBalance(currency?: string): Promise<any> {
     const params: Record<string, string> = {};
     if (currency) params.asset = currency;
-    return this.signedRequest('POST', '/v2/spot/user_info', params);
+    return this.signedRequest('POST', '/v2/supplement/user_info', params);
   }
 
   async withdraw(currency: string, amount: string, address: string, network?: string): Promise<any> {
@@ -125,10 +123,10 @@ export class LBankClient {
       toAddress: address,
     };
     if (network) params.chain = network;
-    return this.signedRequest('POST', '/v2/withdraw', params);
+    return this.signedRequest('POST', '/v2/withdraw/submit', params);
   }
 
   async getDepositAddress(currency: string): Promise<any> {
-    return this.signedRequest('POST', '/v2/withdraw/getAddressByAsset', { asset: currency });
+    return this.signedRequest('POST', '/v2/supplement/getDepositAddress', { asset: currency });
   }
 }
