@@ -1,0 +1,16 @@
+{
+  "name": "صراف اکسچنج | Sarraf Exchange",
+  "short_name": "صراف اکسچنج",
+  "description": "منصة آمنة وموثوقة لتبادل العملات الرقمية",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c1017",
+  "theme_color": "#00d4aa",
+  "orientation": "any",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    { "src": "/sarraf-logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/sarraf-logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
