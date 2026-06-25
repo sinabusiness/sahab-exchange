@@ -33,25 +33,31 @@ app.get('/api/market/tickers', async (c) => {
       'op_usdt','sui_usdt','pepe_usdt','shib_usdt','xlm_usdt','trx_usdt',
       'ton_usdt','etc_usdt','wif_usdt','floki_usdt','cro_usdt','algo_usdt',
       'sei_usdt','inj_usdt','tia_usdt','render_usdt','fet_usdt','grt_usdt',
-      'aave_usdt','mkr_usdt','crv_usdt','sand_usdt','mana_usdt','axs_usdt',
-      'eos_usdt','xtz_usdt','hbar_usdt','icp_usdt','vet_usdt','theta_usdt',
-      'comp_usdt','yfi_usdt','sushi_usdt','ftm_usdt','zil_usdt','enj_usdt',
-      'chz_usdt','ldo_usdt','flow_usdt','egld_usdt','kava_usdt','ksm_usdt',
-      'zec_usdt','dash_usdt','neo_usdt','qtum_usdt','iota_usdt','xmr_usdt',
-      'bch_usdt','stx_usdt','imx_usdt','blur_usdt','jup_usdt','pyth_usdt',
-      'wld_usdt','ordi_usdt','bonk_usdt','strk_usdt','ondo_usdt','not_usdt',
-      'jto_usdt','w_usdt','tao_usdt','virtual_usdt','fartcoin_usdt',
-      'popcat_usdt','bome_usdt','ens_usdt','pendle_usdt','kas_usdt','pol_usdt',
+      'aave_usdt','mkr_usdt','crv_usdt','sand_usdt','eos_usdt','xtz_usdt',
+      'hbar_usdt','icp_usdt','vet_usdt','bch_usdt','jup_usdt','pyth_usdt',
+      'wld_usdt','bonk_usdt','not_usdt','kas_usdt',
     ];
     const unique = [...new Set(topSymbols)];
-    const results = await Promise.allSettled(
-      unique.map(sym =>
-        lbkFetch(`${LBANK}/v2/ticker/24hr.do?symbol=${sym}`)
-          .then(d => d.data?.[0])
-          .catch(() => null)
-      )
-    );
-    const tickers = results
+
+    // Batch in groups of 10 to avoid rate limiting
+    const batchFetch = async (syms: string[]) => {
+      return Promise.allSettled(
+        syms.map(sym =>
+          lbkFetch(`${LBANK}/v2/ticker/24hr.do?symbol=${sym}`)
+            .then(d => d.data?.[0])
+        )
+      );
+    };
+
+    const batchSize = 10;
+    const allResults: PromiseSettledResult<any>[] = [];
+    for (let i = 0; i < unique.length; i += batchSize) {
+      const batch = unique.slice(i, i + batchSize);
+      const results = await batchFetch(batch);
+      allResults.push(...results);
+    }
+
+    const tickers = allResults
       .filter((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled' && r.value?.symbol)
       .map(r => r.value);
     return c.json(tickers);
