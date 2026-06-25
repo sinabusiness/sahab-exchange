@@ -8,3 +8,9 @@ verify_jwt = false
 
 [functions.create-order]
 verify_jwt = true
+
+[functions.send-confirmation-email]
+verify_jwt = false
+
+[functions.send-reset-email]
+verify_jwt = false

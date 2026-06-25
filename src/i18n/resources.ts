@@ -15,18 +15,19 @@ export const RTL_LANGS = ["ar", "fa", "ur"];
 
 type Dict = {
   brand: string;
-  nav: { rates: string; converter: string; services: string; contact: string; login: string; dashboard: string; logout: string; menuOpen: string; menuClose: string; language: string };
+  nav: { rates: string; converter: string; services: string; contact: string; market: string; login: string; dashboard: string; logout: string; menuOpen: string; menuClose: string; language: string; exchange: string };
   hero: { tagline: string; subtitle: string; bullets: string; viewRates: string; convert: string; imgAlt: string };
   rates: { cryptoTitle: string; cryptoSub: string; metalsTitle: string; metalsSub: string; perOunce: string; fiatTitle: string; fiatSub: string; gold: string; silver: string };
   converter: { title: string; subtitle: string; from: string; to: string; fromAria: string; toAria: string; swap: string; disclaimer: string };
   services: { title: string; subtitle: string; items: { title: string; desc: string }[] };
   footer: { title: string; subtitle: string; whatsapp: string; email: string; rights: string };
   auth: { loginTitle: string; signupTitle: string; loginSub: string; signupSub: string; fullName: string; fullNamePh: string; email: string; password: string; submitLogin: string; submitSignup: string; toLogin: string; toSignup: string; loginErr: string; signupErr: string; signupOk: string; signupOkDesc: string; forgotPassword: string; resetDesc: string; resetSubmit: string; resetSent: string; resetSentDesc: string };
+  market: { title: string; sub: string; search: string; watchlist: string; rank: string; name: string; price: string; h1: string; h24: string; d7: string; volume: string; mcap: string; sparkline: string; coinPerPage: string; noWatchlist: string; noCoins: string; updated: string; prev: string; next: string };
 };
 
 const en: Dict = {
   brand: "Sarraf",
-  nav: { rates: "Rates", converter: "Convert", services: "Services", contact: "Contact", login: "Sign in", dashboard: "Dashboard", logout: "Sign out", menuOpen: "Open menu", menuClose: "Close menu", language: "Language" },
+  nav: { rates: "Rates", converter: "Convert", services: "Services", contact: "Contact", market: "Market", login: "Sign in", dashboard: "Dashboard", logout: "Sign out", menuOpen: "Open menu", menuClose: "Close menu", language: "Language", exchange: "Exchange" },
   hero: { tagline: "Sarraf", subtitle: "Crypto, gold & silver exchange platform", bullets: "Live rates • Instant transfers • Total security", viewRates: "View rates", convert: "Convert", imgAlt: "Sarraf - crypto and gold exchange platform" },
   rates: { cryptoTitle: "Cryptocurrencies", cryptoSub: "Live prices from the global market", metalsTitle: "Precious metals", metalsSub: "Gold and silver per ounce", perOunce: "per ounce", fiatTitle: "Local currencies", fiatSub: "Exchange rates against USD", gold: "Gold", silver: "Silver" },
   converter: { title: "Currency converter", subtitle: "Convert between world currencies at live rates", from: "From", to: "To", fromAria: "Source currency", toAria: "Target currency", swap: "Swap currencies", disclaimer: "Rates are approximate and update every minute" },
@@ -40,11 +41,12 @@ const en: Dict = {
   ]},
   footer: { title: "Contact us", subtitle: "We're here to help anytime", whatsapp: "Chat on WhatsApp", email: "Email us", rights: "© 2026 Sarraf. All rights reserved" },
   auth: { loginTitle: "Sign in", signupTitle: "Create account", loginSub: "Access your account to manage orders", signupSub: "Start trading safely in minutes", fullName: "Full name", fullNamePh: "Your name", email: "Email", password: "Password", submitLogin: "Sign in", submitSignup: "Create account", toLogin: "Have an account? Sign in", toSignup: "No account? Sign up now", loginErr: "Sign-in error", signupErr: "Sign-up error", signupOk: "Account created", signupOkDesc: "Check your email to verify your account", forgotPassword: "Forgot password?", resetDesc: "Enter your email and we'll send you a link to reset your password.", resetSubmit: "Send reset link", resetSent: "Email sent!", resetSentDesc: "Check your inbox for the password reset link." },
+  market: { title: "Crypto Market", sub: "Live prices for top 100 cryptocurrencies", search: "Search coin...", watchlist: "Watchlist", rank: "Rank", name: "Name", price: "Price", h1: "1h", h24: "24h", d7: "7d", volume: "Volume", mcap: "Market Cap", sparkline: "7d", coinPerPage: "coins", noWatchlist: "No coins in watchlist", noCoins: "No coins found", updated: "Updated live", prev: "Prev", next: "Next" },
 };
 
 const ar: Dict = {
   brand: "صَرّاف",
-  nav: { rates: "الأسعار", converter: "التحويل", services: "الخدمات", contact: "تواصل", login: "دخول", dashboard: "لوحة التحكم", logout: "تسجيل الخروج", menuOpen: "فتح القائمة", menuClose: "إغلاق القائمة", language: "اللغة" },
+  nav: { rates: "الأسعار", converter: "التحويل", services: "الخدمات", contact: "تواصل", market: "السوق", login: "دخول", dashboard: "لوحة التحكم", logout: "تسجيل الخروج", menuOpen: "فتح القائمة", menuClose: "إغلاق القائمة", language: "اللغة", exchange: "الصُّرف" },
   hero: { tagline: "صَرّاف", subtitle: "منصة تبادل العملات الرقمية والذهب والفضة", bullets: "أسعار لحظية • تحويل فوري • أمان مطلق", viewRates: "مشاهدة الأسعار", convert: "تحويل العملات", imgAlt: "صراف - منصة تبادل العملات الرقمية والذهب" },
   rates: { cryptoTitle: "العملات الرقمية", cryptoSub: "أسعار لحظية من السوق العالمي", metalsTitle: "المعادن الثمينة", metalsSub: "أسعار الذهب والفضة بالأونصة", perOunce: "للأونصة الواحدة", fiatTitle: "العملات المحلية", fiatSub: "أسعار الصرف مقابل الدولار الأمريكي", gold: "الذهب", silver: "الفضة" },
   converter: { title: "محوّل العملات", subtitle: "حوّل بين العملات العالمية بأسعار لحظية", from: "من", to: "إلى", fromAria: "العملة المصدر", toAria: "العملة الهدف", swap: "تبديل العملات", disclaimer: "الأسعار تقريبية وتُحدّث كل دقيقة" },
@@ -58,11 +60,12 @@ const ar: Dict = {
   ]},
   footer: { title: "تواصل معنا", subtitle: "نحن هنا لمساعدتك في أي وقت", whatsapp: "تواصل عبر واتساب", email: "البريد الإلكتروني", rights: "© 2026 صراف. جميع الحقوق محفوظة" },
   auth: { loginTitle: "تسجيل الدخول", signupTitle: "إنشاء حساب جديد", loginSub: "ادخل إلى حسابك لإدارة طلباتك", signupSub: "ابدأ التبادل بأمان خلال دقائق", fullName: "الاسم الكامل", fullNamePh: "أدخل اسمك", email: "البريد الإلكتروني", password: "كلمة المرور", submitLogin: "تسجيل الدخول", submitSignup: "إنشاء حساب", toLogin: "لديك حساب؟ سجّل الدخول", toSignup: "ليس لديك حساب؟ سجّل الآن", loginErr: "خطأ في الدخول", signupErr: "خطأ في التسجيل", signupOk: "تم التسجيل بنجاح", signupOkDesc: "تحقق من بريدك الإلكتروني لتأكيد الحساب", forgotPassword: "نسيت كلمة المرور؟", resetDesc: "أدخل بريدك الإلكتروني وسنرسل لك رابط لإعادة تعيين كلمة المرور.", resetSubmit: "إرسال رابط الإعادة", resetSent: "تم الإرسال!", resetSentDesc: "تحقق من بريدك الإلكتروني للحصول على رابط إعادة تعيين كلمة المرور." },
+  market: { title: "سوق العملات الرقمية", sub: "أسعار لحظية لأفضل 100 عملة رقمية", search: "ابحث عن عملة...", watchlist: "المفضلة", rank: "الترتيب", name: "الاسم", price: "السعر", h1: "ساعة", h24: "24 ساعة", d7: "7 أيام", volume: "الحجم", mcap: "القيمة السوقية", sparkline: "7 أيام", coinPerPage: "عملات", noWatchlist: "لا عملات في المفضلة", noCoins: "لا توجد عملات", updated: "تحديث مباشر", prev: "السابق", next: "التالي" },
 };
 
 const fa: Dict = {
   brand: "صرّاف",
-  nav: { rates: "قیمت‌ها", converter: "تبدیل", services: "خدمات", contact: "تماس", login: "ورود", dashboard: "داشبورد", logout: "خروج", menuOpen: "باز کردن منو", menuClose: "بستن منو", language: "زبان" },
+  nav: { rates: "قیمت‌ها", converter: "تبدیل", services: "خدمات", contact: "تماس", market: "بازار", login: "ورود", dashboard: "داشبورد", logout: "خروج", menuOpen: "باز کردن منو", menuClose: "بستن منو", language: "زبان", exchange: "صرافی" },
   hero: { tagline: "صرّاف", subtitle: "پلتفرم تبادل ارز دیجیتال، طلا و نقره", bullets: "قیمت‌های لحظه‌ای • انتقال فوری • امنیت کامل", viewRates: "مشاهده قیمت‌ها", convert: "تبدیل ارز", imgAlt: "صراف - پلتفرم تبادل ارز دیجیتال و طلا" },
   rates: { cryptoTitle: "ارزهای دیجیتال", cryptoSub: "قیمت‌های لحظه‌ای از بازار جهانی", metalsTitle: "فلزات گرانبها", metalsSub: "قیمت طلا و نقره به ازای هر اونس", perOunce: "هر اونس", fiatTitle: "ارزهای محلی", fiatSub: "نرخ تبدیل در برابر دلار آمریکا", gold: "طلا", silver: "نقره" },
   converter: { title: "مبدل ارز", subtitle: "تبدیل میان ارزهای جهانی با نرخ لحظه‌ای", from: "از", to: "به", fromAria: "ارز مبدا", toAria: "ارز مقصد", swap: "تعویض ارزها", disclaimer: "قیمت‌ها تقریبی هستند و هر دقیقه به‌روزرسانی می‌شوند" },
@@ -76,11 +79,12 @@ const fa: Dict = {
   ]},
   footer: { title: "با ما در تماس باشید", subtitle: "ما هر زمان آماده کمک هستیم", whatsapp: "گفتگو در واتساپ", email: "ایمیل", rights: "© ۲۰۲۶ صراف. تمامی حقوق محفوظ است" },
   auth: { loginTitle: "ورود", signupTitle: "ایجاد حساب جدید", loginSub: "برای مدیریت سفارش‌ها وارد شوید", signupSub: "در چند دقیقه به‌صورت امن آغاز کنید", fullName: "نام کامل", fullNamePh: "نام خود را وارد کنید", email: "ایمیل", password: "رمز عبور", submitLogin: "ورود", submitSignup: "ایجاد حساب", toLogin: "حساب دارید؟ وارد شوید", toSignup: "حساب ندارید؟ اکنون ثبت‌نام کنید", loginErr: "خطا در ورود", signupErr: "خطا در ثبت‌نام", signupOk: "حساب با موفقیت ایجاد شد", signupOkDesc: "ایمیل خود را برای تایید حساب بررسی کنید", forgotPassword: "رمز عبور را فراموش کردید؟", resetDesc: "ایمیل خود را وارد کنید تا لینک بازیابی رمز عبور برایتان ارسال شود.", resetSubmit: "ارسال لینک بازیابی", resetSent: "ایمیل ارسال شد!", resetSentDesc: "ایمیل خود را برای دریافت لینک بازیابی رمز عبور بررسی کنید." },
+  market: { title: "بازار ارز دیجیتال", sub: "قیمت‌های لحظه‌ای ۱۰۰ ارز دیجیتال برتر", search: "جستجوی ارز...", watchlist: "علاقه‌مندی‌ها", rank: "رتبه", name: "نام", price: "قیمت", h1: "۱ ساعته", h24: "۲۴ ساعته", d7: "۷ روزه", volume: "حجم", mcap: "ارزش بازار", sparkline: "۷ روزه", coinPerPage: "ارز", noWatchlist: "ارزی در علاقه‌مندی‌ها نیست", noCoins: "ارزی یافت نشد", updated: "بروزرسانی زنده", prev: "قبلی", next: "بعدی" },
 };
 
 const ur: Dict = {
   brand: "صرّاف",
-  nav: { rates: "نرخیں", converter: "تبدیلی", services: "خدمات", contact: "رابطہ", login: "لاگ ان", dashboard: "ڈیش بورڈ", logout: "لاگ آؤٹ", menuOpen: "مینو کھولیں", menuClose: "مینو بند کریں", language: "زبان" },
+  nav: { rates: "نرخیں", converter: "تبدیلی", services: "خدمات", contact: "رابطہ", market: "مارکیٹ", login: "لاگ ان", dashboard: "ڈیش بورڈ", logout: "لاگ آؤٹ", menuOpen: "مینو کھولیں", menuClose: "مینو بند کریں", language: "زبان", exchange: "صرافی" },
   hero: { tagline: "صرّاف", subtitle: "کرپٹو، سونا اور چاندی کے تبادلے کا پلیٹ فارم", bullets: "براہ راست نرخ • فوری منتقلی • مکمل سیکیورٹی", viewRates: "نرخیں دیکھیں", convert: "کرنسی تبدیل کریں", imgAlt: "صراف - کرپٹو اور سونے کے تبادلے کا پلیٹ فارم" },
   rates: { cryptoTitle: "کرپٹو کرنسیز", cryptoSub: "عالمی مارکیٹ سے براہ راست قیمتیں", metalsTitle: "قیمتی دھاتیں", metalsSub: "فی اونس سونے اور چاندی کی قیمت", perOunce: "فی اونس", fiatTitle: "مقامی کرنسیز", fiatSub: "امریکی ڈالر کے مقابلے میں شرحیں", gold: "سونا", silver: "چاندی" },
   converter: { title: "کرنسی کنورٹر", subtitle: "براہ راست نرخوں پر دنیا کی کرنسیوں کے درمیان تبدیل کریں", from: "سے", to: "تک", fromAria: "ماخذ کرنسی", toAria: "ہدف کرنسی", swap: "کرنسیاں تبدیل کریں", disclaimer: "نرخیں تخمینی ہیں اور ہر منٹ اپ ڈیٹ ہوتی ہیں" },
@@ -94,11 +98,12 @@ const ur: Dict = {
   ]},
   footer: { title: "ہم سے رابطہ کریں", subtitle: "ہم ہر وقت مدد کے لیے حاضر ہیں", whatsapp: "واٹس ایپ پر چیٹ کریں", email: "ای میل", rights: "© 2026 صراف۔ جملہ حقوق محفوظ ہیں" },
   auth: { loginTitle: "لاگ ان", signupTitle: "نیا اکاؤنٹ بنائیں", loginSub: "آرڈرز منظم کرنے کے لیے لاگ ان کریں", signupSub: "منٹوں میں محفوظ طریقے سے شروع کریں", fullName: "پورا نام", fullNamePh: "اپنا نام درج کریں", email: "ای میل", password: "پاس ورڈ", submitLogin: "لاگ ان", submitSignup: "اکاؤنٹ بنائیں", toLogin: "اکاؤنٹ ہے؟ لاگ ان کریں", toSignup: "اکاؤنٹ نہیں؟ ابھی رجسٹر کریں", loginErr: "لاگ ان میں خرابی", signupErr: "رجسٹریشن میں خرابی", signupOk: "اکاؤنٹ بن گیا", signupOkDesc: "اپنے اکاؤنٹ کی تصدیق کے لیے ای میل دیکھیں", forgotPassword: "پاس ورڈ بھول گئے؟", resetDesc: "اپنا ای میل درج کریں اور ہم آپ کو پاس ورڈ ری سیٹ لنک بھیجیں گے۔", resetSubmit: "ری سیٹ لنک بھیجیں", resetSent: "ای میل بھیج دیا گیا!", resetSentDesc: "پاس ورڈ ری سیٹ لنک کے لیے اپنا ان باکس چیک کریں۔" },
+  market: { title: "کرپٹو مارکیٹ", sub: "ٹاپ 100 کرپٹو کرنسیوں کی براہ راست قیمتیں", search: "کوائن تلاش کریں...", watchlist: "فہرستِ پسندیدہ", rank: "درجہ", name: "نام", price: "قیمت", h1: "۱ گھنٹہ", h24: "۲۴ گھنٹے", d7: "۷ دن", volume: "والیوم", mcap: "مارکیٹ کیپ", sparkline: "۷ دن", coinPerPage: "کوائنز", noWatchlist: "فہرستِ پسندیدہ میں کوائن نہیں", noCoins: "کوائن نہیں ملیں", updated: "براہ راست اپ ڈیٹ", prev: "پچھلا", next: "اگلا" },
 };
 
 const ru: Dict = {
   brand: "Sarraf",
-  nav: { rates: "Курсы", converter: "Конвертер", services: "Услуги", contact: "Контакты", login: "Войти", dashboard: "Кабинет", logout: "Выйти", menuOpen: "Открыть меню", menuClose: "Закрыть меню", language: "Язык" },
+  nav: { rates: "Курсы", converter: "Конвертер", services: "Услуги", contact: "Контакты", market: "Рынок", login: "Войти", dashboard: "Кабинет", logout: "Выйти", menuOpen: "Открыть меню", menuClose: "Закрыть меню", language: "Язык", exchange: "Биржа" },
   hero: { tagline: "Sarraf", subtitle: "Платформа обмена криптовалют, золота и серебра", bullets: "Курсы онлайн • Мгновенные переводы • Полная безопасность", viewRates: "Смотреть курсы", convert: "Конвертировать", imgAlt: "Sarraf — платформа обмена криптовалют и золота" },
   rates: { cryptoTitle: "Криптовалюты", cryptoSub: "Цены с мирового рынка в реальном времени", metalsTitle: "Драгоценные металлы", metalsSub: "Золото и серебро за унцию", perOunce: "за унцию", fiatTitle: "Местные валюты", fiatSub: "Курсы по отношению к USD", gold: "Золото", silver: "Серебро" },
   converter: { title: "Конвертер валют", subtitle: "Конвертируйте мировые валюты по актуальным курсам", from: "Из", to: "В", fromAria: "Исходная валюта", toAria: "Целевая валюта", swap: "Поменять местами", disclaimer: "Курсы приблизительные, обновляются каждую минуту" },
@@ -112,11 +117,12 @@ const ru: Dict = {
   ]},
   footer: { title: "Свяжитесь с нами", subtitle: "Мы всегда готовы помочь", whatsapp: "Написать в WhatsApp", email: "Электронная почта", rights: "© 2026 Sarraf. Все права защищены" },
   auth: { loginTitle: "Вход", signupTitle: "Создать аккаунт", loginSub: "Войдите для управления заказами", signupSub: "Начните торговлю безопасно за минуты", fullName: "Полное имя", fullNamePh: "Введите ваше имя", email: "Email", password: "Пароль", submitLogin: "Войти", submitSignup: "Создать аккаунт", toLogin: "Уже есть аккаунт? Войти", toSignup: "Нет аккаунта? Зарегистрироваться", loginErr: "Ошибка входа", signupErr: "Ошибка регистрации", signupOk: "Регистрация успешна", signupOkDesc: "Проверьте email для подтверждения аккаунта", forgotPassword: "Забыли пароль?", resetDesc: "Введите email, и мы отправим ссылку для сброса пароля.", resetSubmit: "Отправить ссылку", resetSent: "Письмо отправлено!", resetSentDesc: "Проверьте почту для ссылки на сброс пароля." },
+  market: { title: "Крипторынок", sub: "Цены на 100 крупнейших криптовалют в реальном времени", search: "Поиск монеты...", watchlist: "Избранное", rank: "Ранг", name: "Название", price: "Цена", h1: "1ч", h24: "24ч", d7: "7д", volume: "Объём", mcap: "Рыночная кап.", sparkline: "7д", coinPerPage: "монет", noWatchlist: "Нет монет в избранном", noCoins: "Монеты не найдены", updated: "Обновление онлайн", prev: "Назад", next: "Далее" },
 };
 
 const zh: Dict = {
   brand: "Sarraf",
-  nav: { rates: "汇率", converter: "兑换", services: "服务", contact: "联系", login: "登录", dashboard: "控制台", logout: "退出", menuOpen: "打开菜单", menuClose: "关闭菜单", language: "语言" },
+  nav: { rates: "汇率", converter: "兑换", services: "服务", contact: "联系", market: "市场", login: "登录", dashboard: "控制台", logout: "退出", menuOpen: "打开菜单", menuClose: "关闭菜单", language: "语言", exchange: "交易所" },
   hero: { tagline: "Sarraf", subtitle: "加密货币、黄金与白银交易平台", bullets: "实时汇率 • 即时转账 • 全面安全", viewRates: "查看汇率", convert: "立即兑换", imgAlt: "Sarraf - 加密货币和黄金交易平台" },
   rates: { cryptoTitle: "加密货币", cryptoSub: "来自全球市场的实时价格", metalsTitle: "贵金属", metalsSub: "每盎司黄金与白银价格", perOunce: "每盎司", fiatTitle: "本地货币", fiatSub: "兑美元汇率", gold: "黄金", silver: "白银" },
   converter: { title: "货币兑换器", subtitle: "以实时汇率在世界货币之间兑换", from: "从", to: "到", fromAria: "源货币", toAria: "目标货币", swap: "切换货币", disclaimer: "汇率为近似值，每分钟更新一次" },
@@ -130,11 +136,12 @@ const zh: Dict = {
   ]},
   footer: { title: "联系我们", subtitle: "我们随时为您提供帮助", whatsapp: "WhatsApp 聊天", email: "电子邮件", rights: "© 2026 Sarraf。版权所有" },
   auth: { loginTitle: "登录", signupTitle: "创建账户", loginSub: "登录以管理您的订单", signupSub: "几分钟内安全开始交易", fullName: "全名", fullNamePh: "请输入您的姓名", email: "电子邮件", password: "密码", submitLogin: "登录", submitSignup: "创建账户", toLogin: "已有账户？登录", toSignup: "没有账户？立即注册", loginErr: "登录错误", signupErr: "注册错误", signupOk: "账户已创建", signupOkDesc: "请检查邮箱以验证您的账户", forgotPassword: "忘记密码？", resetDesc: "输入您的邮箱，我们将发送密码重置链接。", resetSubmit: "发送重置链接", resetSent: "邮件已发送！", resetSentDesc: "请检查邮箱获取密码重置链接。" },
+  market: { title: "加密货币市场", sub: "前100种加密货币实时价格", search: "搜索币种...", watchlist: "自选", rank: "排名", name: "名称", price: "价格", h1: "1小时", h24: "24小时", d7: "7天", volume: "成交量", mcap: "市值", sparkline: "7天", coinPerPage: "种币", noWatchlist: "自选列表为空", noCoins: "未找到币种", updated: "实时更新", prev: "上一页", next: "下一页" },
 };
 
 const tr: Dict = {
   brand: "Sarraf",
-  nav: { rates: "Kurlar", converter: "Çevirici", services: "Hizmetler", contact: "İletişim", login: "Giriş", dashboard: "Panel", logout: "Çıkış", menuOpen: "Menüyü aç", menuClose: "Menüyü kapat", language: "Dil" },
+  nav: { rates: "Kurlar", converter: "Çevirici", services: "Hizmetler", contact: "İletişim", market: "Piyasa", login: "Giriş", dashboard: "Panel", logout: "Çıkış", menuOpen: "Menüyü aç", menuClose: "Menüyü kapat", language: "Dil", exchange: "Borsa" },
   hero: { tagline: "Sarraf", subtitle: "Kripto, altın ve gümüş takas platformu", bullets: "Canlı kurlar • Anında transfer • Tam güvenlik", viewRates: "Kurları gör", convert: "Çevir", imgAlt: "Sarraf - kripto ve altın takas platformu" },
   rates: { cryptoTitle: "Kripto paralar", cryptoSub: "Küresel piyasadan canlı fiyatlar", metalsTitle: "Değerli metaller", metalsSub: "Ons başına altın ve gümüş", perOunce: "ons başına", fiatTitle: "Yerel para birimleri", fiatSub: "USD karşısındaki kurlar", gold: "Altın", silver: "Gümüş" },
   converter: { title: "Para birimi çevirici", subtitle: "Dünya para birimleri arasında canlı kurlarla çevirin", from: "Kaynak", to: "Hedef", fromAria: "Kaynak para birimi", toAria: "Hedef para birimi", swap: "Yerlerini değiştir", disclaimer: "Kurlar yaklaşıktır ve her dakika güncellenir" },
@@ -148,11 +155,12 @@ const tr: Dict = {
   ]},
   footer: { title: "Bize ulaşın", subtitle: "Her zaman yardıma hazırız", whatsapp: "WhatsApp'tan yazın", email: "E-posta", rights: "© 2026 Sarraf. Tüm hakları saklıdır" },
   auth: { loginTitle: "Giriş", signupTitle: "Hesap oluştur", loginSub: "Siparişlerinizi yönetmek için giriş yapın", signupSub: "Dakikalar içinde güvenle başlayın", fullName: "Ad soyad", fullNamePh: "Adınızı girin", email: "E-posta", password: "Şifre", submitLogin: "Giriş yap", submitSignup: "Hesap oluştur", toLogin: "Hesabınız var mı? Giriş yapın", toSignup: "Hesabınız yok mu? Kaydolun", loginErr: "Giriş hatası", signupErr: "Kayıt hatası", signupOk: "Hesap oluşturuldu", signupOkDesc: "Hesabınızı doğrulamak için e-postanızı kontrol edin", forgotPassword: "Şifreni mi unuttun?", resetDesc: "E-postanızı girin, size şifre sıfırlama bağlantısı gönderelim.", resetSubmit: "Bağlantı gönder", resetSent: "E-posta gönderildi!", resetSentDesc: "Şifre sıfırlama bağlantısı için gelen kutunuzu kontrol edin." },
+  market: { title: "Kripto Piyasası", sub: "En büyük 100 kripto paranın canlı fiyatları", search: "Coin ara...", watchlist: "İzleme listesi", rank: "Sıra", name: "İsim", price: "Fiyat", h1: "1s", h24: "24s", d7: "7g", volume: "Hacim", mcap: "Piyasa Değeri", sparkline: "7g", coinPerPage: "coin", noWatchlist: "İzleme listesinde coin yok", noCoins: "Coin bulunamadı", updated: "Canlı güncelleme", prev: "Önceki", next: "Sonraki" },
 };
 
 const fr: Dict = {
   brand: "Sarraf",
-  nav: { rates: "Cours", converter: "Convertir", services: "Services", contact: "Contact", login: "Connexion", dashboard: "Tableau de bord", logout: "Déconnexion", menuOpen: "Ouvrir le menu", menuClose: "Fermer le menu", language: "Langue" },
+  nav: { rates: "Cours", converter: "Convertir", services: "Services", contact: "Contact", market: "Marché", login: "Connexion", dashboard: "Tableau de bord", logout: "Déconnexion", menuOpen: "Ouvrir le menu", menuClose: "Fermer le menu", language: "Langue", exchange: "Bourse" },
   hero: { tagline: "Sarraf", subtitle: "Plateforme d'échange crypto, or et argent", bullets: "Cours en direct • Transferts instantanés • Sécurité totale", viewRates: "Voir les cours", convert: "Convertir", imgAlt: "Sarraf - plateforme d'échange crypto et or" },
   rates: { cryptoTitle: "Cryptomonnaies", cryptoSub: "Prix en direct du marché mondial", metalsTitle: "Métaux précieux", metalsSub: "Or et argent à l'once", perOunce: "à l'once", fiatTitle: "Devises locales", fiatSub: "Taux de change face au dollar", gold: "Or", silver: "Argent" },
   converter: { title: "Convertisseur de devises", subtitle: "Convertissez entre les devises mondiales aux taux en direct", from: "De", to: "Vers", fromAria: "Devise source", toAria: "Devise cible", swap: "Inverser les devises", disclaimer: "Les taux sont approximatifs et mis à jour chaque minute" },
@@ -166,11 +174,12 @@ const fr: Dict = {
   ]},
   footer: { title: "Contactez-nous", subtitle: "Nous sommes là pour vous aider à tout moment", whatsapp: "Discuter sur WhatsApp", email: "E-mail", rights: "© 2026 Sarraf. Tous droits réservés" },
   auth: { loginTitle: "Connexion", signupTitle: "Créer un compte", loginSub: "Connectez-vous pour gérer vos commandes", signupSub: "Commencez en toute sécurité en quelques minutes", fullName: "Nom complet", fullNamePh: "Votre nom", email: "E-mail", password: "Mot de passe", submitLogin: "Se connecter", submitSignup: "Créer le compte", toLogin: "Déjà un compte ? Se connecter", toSignup: "Pas de compte ? S'inscrire", loginErr: "Erreur de connexion", signupErr: "Erreur d'inscription", signupOk: "Compte créé", signupOkDesc: "Vérifiez votre e-mail pour activer votre compte", forgotPassword: "Mot de passe oublié ?", resetDesc: "Entrez votre e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.", resetSubmit: "Envoyer le lien", resetSent: "E-mail envoyé !", resetSentDesc: "Vérifiez votre boîte de réception pour le lien de réinitialisation." },
+  market: { title: "Marché Crypto", sub: "Prix en direct des 100 principales cryptomonnaies", search: "Rechercher une coin...", watchlist: "Liste de suivi", rank: "Rang", name: "Nom", price: "Prix", h1: "1h", h24: "24h", d7: "7j", volume: "Volume", mcap: "Cap. marché", sparkline: "7j", coinPerPage: "coins", noWatchlist: "Aucun coin dans la liste", noCoins: "Aucun coin trouvé", updated: "Mis à jour en direct", prev: "Préc.", next: "Suiv." },
 };
 
 const es: Dict = {
   brand: "Sarraf",
-  nav: { rates: "Tasas", converter: "Convertir", services: "Servicios", contact: "Contacto", login: "Entrar", dashboard: "Panel", logout: "Salir", menuOpen: "Abrir menú", menuClose: "Cerrar menú", language: "Idioma" },
+  nav: { rates: "Tasas", converter: "Convertir", services: "Servicios", contact: "Contacto", market: "Mercado", login: "Entrar", dashboard: "Panel", logout: "Salir", menuOpen: "Abrir menú", menuClose: "Cerrar menú", language: "Idioma", exchange: "Bolsa" },
   hero: { tagline: "Sarraf", subtitle: "Plataforma de intercambio de cripto, oro y plata", bullets: "Tasas en vivo • Transferencias instantáneas • Seguridad total", viewRates: "Ver tasas", convert: "Convertir", imgAlt: "Sarraf - plataforma de intercambio de cripto y oro" },
   rates: { cryptoTitle: "Criptomonedas", cryptoSub: "Precios en vivo del mercado global", metalsTitle: "Metales preciosos", metalsSub: "Oro y plata por onza", perOunce: "por onza", fiatTitle: "Monedas locales", fiatSub: "Tasas frente al dólar estadounidense", gold: "Oro", silver: "Plata" },
   converter: { title: "Conversor de divisas", subtitle: "Convierte entre divisas mundiales con tasas en vivo", from: "De", to: "A", fromAria: "Divisa de origen", toAria: "Divisa de destino", swap: "Intercambiar divisas", disclaimer: "Las tasas son aproximadas y se actualizan cada minuto" },
@@ -184,11 +193,12 @@ const es: Dict = {
   ]},
   footer: { title: "Contáctanos", subtitle: "Estamos para ayudarte en cualquier momento", whatsapp: "Chatear por WhatsApp", email: "Correo electrónico", rights: "© 2026 Sarraf. Todos los derechos reservados" },
   auth: { loginTitle: "Iniciar sesión", signupTitle: "Crear cuenta", loginSub: "Accede para gestionar tus pedidos", signupSub: "Empieza a operar de forma segura en minutos", fullName: "Nombre completo", fullNamePh: "Tu nombre", email: "Correo", password: "Contraseña", submitLogin: "Entrar", submitSignup: "Crear cuenta", toLogin: "¿Ya tienes cuenta? Inicia sesión", toSignup: "¿Sin cuenta? Regístrate", loginErr: "Error al iniciar sesión", signupErr: "Error de registro", signupOk: "Cuenta creada", signupOkDesc: "Revisa tu correo para verificar la cuenta", forgotPassword: "¿Olvidaste tu contraseña?", resetDesc: "Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.", resetSubmit: "Enviar enlace", resetSent: "¡Correo enviado!", resetSentDesc: "Revisa tu bandeja para el enlace de restablecimiento." },
+  market: { title: "Mercado Crypto", sub: "Precios en vivo de las 100 principales criptomonedas", search: "Buscar coin...", watchlist: "Lista", rank: "Rango", name: "Nombre", price: "Precio", h1: "1h", h24: "24h", d7: "7d", volume: "Volumen", mcap: "Cap. mercado", sparkline: "7d", coinPerPage: "coins", noWatchlist: "Sin coins en la lista", noCoins: "No se encontraron coins", updated: "Actualización en vivo", prev: "Anterior", next: "Siguiente" },
 };
 
 const hi: Dict = {
   brand: "Sarraf",
-  nav: { rates: "दरें", converter: "बदलें", services: "सेवाएँ", contact: "संपर्क", login: "साइन इन", dashboard: "डैशबोर्ड", logout: "साइन आउट", menuOpen: "मेनू खोलें", menuClose: "मेनू बंद करें", language: "भाषा" },
+  nav: { rates: "दरें", converter: "बदलें", services: "सेवाएँ", contact: "संपर्क", market: "बाज़ार", login: "साइन इन", dashboard: "डैशबोर्ड", logout: "साइन आउट", menuOpen: "मेनू खोलें", menuClose: "मेनू बंद करें", language: "भाषा", exchange: "एक्सचेंज" },
   hero: { tagline: "Sarraf", subtitle: "क्रिप्टो, सोना और चांदी विनिमय मंच", bullets: "लाइव दरें • तत्काल स्थानांतरण • पूर्ण सुरक्षा", viewRates: "दरें देखें", convert: "बदलें", imgAlt: "Sarraf - क्रिप्टो और सोना विनिमय मंच" },
   rates: { cryptoTitle: "क्रिप्टोकरेंसी", cryptoSub: "वैश्विक बाज़ार से लाइव दरें", metalsTitle: "कीमती धातुएँ", metalsSub: "प्रति औंस सोना और चांदी", perOunce: "प्रति औंस", fiatTitle: "स्थानीय मुद्राएँ", fiatSub: "USD के मुकाबले दरें", gold: "सोना", silver: "चांदी" },
   converter: { title: "मुद्रा परिवर्तक", subtitle: "लाइव दरों पर विश्व मुद्राओं के बीच बदलें", from: "से", to: "तक", fromAria: "स्रोत मुद्रा", toAria: "लक्ष्य मुद्रा", swap: "मुद्राएँ बदलें", disclaimer: "दरें अनुमानित हैं और हर मिनट अपडेट होती हैं" },
@@ -202,6 +212,7 @@ const hi: Dict = {
   ]},
   footer: { title: "संपर्क करें", subtitle: "हम हर समय मदद के लिए तैयार हैं", whatsapp: "WhatsApp पर चैट करें", email: "ईमेल", rights: "© 2026 Sarraf. सर्वाधिकार सुरक्षित" },
   auth: { loginTitle: "साइन इन", signupTitle: "खाता बनाएँ", loginSub: "अपने ऑर्डर प्रबंधित करने के लिए साइन इन करें", signupSub: "मिनटों में सुरक्षित रूप से शुरू करें", fullName: "पूरा नाम", fullNamePh: "अपना नाम दर्ज करें", email: "ईमेल", password: "पासवर्ड", submitLogin: "साइन इन", submitSignup: "खाता बनाएँ", toLogin: "खाता है? साइन इन करें", toSignup: "खाता नहीं? अभी रजिस्टर करें", loginErr: "साइन इन त्रुटि", signupErr: "रजिस्टर त्रुटि", signupOk: "खाता बन गया", signupOkDesc: "अपने खाते को सत्यापित करने के लिए ईमेल देखें", forgotPassword: "पासवर्ड भूल गए?", resetDesc: "अपना ईमेल दर्ज करें और हम आपको पासवर्ड रीसेट लिंक भेजेंगे।", resetSubmit: "लिंक भेजें", resetSent: "ईमेल भेज दिया!", resetSentDesc: "पासवर्ड रीसेट लिंक के लिए अपना इनबॉक्स देखें।" },
+  market: { title: "क्रिप्टो बाज़ार", sub: "शीर्ष 100 क्रिप्टोकरेंसी की लाइव कीमतें", search: "कॉइन खोजें...", watchlist: "वॉचलिस्ट", rank: "रैंक", name: "नाम", price: "कीमत", h1: "1घं", h24: "24घं", d7: "7दिन", volume: "वॉल्यूम", mcap: "मार्केट कैप", sparkline: "7दिन", coinPerPage: "कॉइन", noWatchlist: "वॉचलिस्ट में कोई कॉइन नहीं", noCoins: "कोई कॉइन नहीं मिला", updated: "लाइव अपडेट", prev: "पिछला", next: "अगला" },
 };
 
 export const resources = {

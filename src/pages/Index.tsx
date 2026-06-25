@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LiveRates from "@/components/LiveRates";
 import CurrencyConverter from "@/components/CurrencyConverter";
+import CryptoMarket from "@/components/CryptoMarket";
 import Services from "@/components/Services";
 import Footer from "@/components/Footer";
 
@@ -52,6 +53,7 @@ const Index = () => {
         <Hero />
         <LiveRates />
         <CurrencyConverter />
+        <CryptoMarket />
         <Services />
       </main>
       <Footer />

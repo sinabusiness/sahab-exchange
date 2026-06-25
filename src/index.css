@@ -66,6 +66,14 @@
 
   body {
     @apply bg-background text-foreground font-cairo;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .backdrop-blur-lg {
+      background-color: hsl(var(--background) / 0.95) !important;
+    }
   }
 }
 

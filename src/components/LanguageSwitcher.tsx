@@ -22,7 +22,7 @@ const LanguageSwitcher = ({ compact = false }: { compact?: boolean }) => {
         {!compact && <span>{current.label}</span>}
         {compact && <span className="text-base leading-none">{current.flag}</span>}
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="max-h-80 overflow-auto bg-popover">
+      <DropdownMenuContent align="end" sideOffset={4} className="max-h-80 overflow-auto bg-popover">
         {LANGUAGES.map((l) => (
           <DropdownMenuItem
             key={l.code}
